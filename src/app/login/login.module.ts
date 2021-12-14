@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import {AppMaterialModule} from "../app.material.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import {AppMaterialModule} from "../app.material.module";
   imports: [
     CommonModule,
     LoginRoutingModule,
-    AppMaterialModule
+    SharedModule
   ]
 })
 export class LoginModule { }

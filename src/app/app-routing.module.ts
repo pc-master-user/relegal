@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('./app.module').then(m => m.AppModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'login',
