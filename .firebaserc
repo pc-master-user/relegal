@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "clinix-dev-1488b": {
+      "hosting": {
+        "relegal": [
+          "relegaldemo"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "clinix-dev-1488b"
+  }
+}

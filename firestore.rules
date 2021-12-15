@@ -1,0 +1,117 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function documentFieldsCheck(requiredFields, optionalFields){
+      let allFields= requiredFields.concat(optionalFields);
+      return request.resource.data.keys().hasAll(requiredFields) && request.resource.data.keys().hasOnly(allFields);
+    }
+
+    function editOnlyFields(allowedFields){
+      let mapDiff = request.resource.data.diff(resource.data);
+      let affectedKeys= mapDiff.affectedKeys();
+      return affectedKeys.hasOnly(allowedFields);
+    }
+
+    match /{document=**}{
+      allow read, write : if false;
+    }
+  
+    match /Doctor/{uid}{
+      function reviewDoctorFieldsAreValidTypes(docData) {
+         return docData.doctorId is string &&
+                docData.name is string &&
+                docData.gender is string &&
+                docData.age is int &&
+                docData.specialisation is string &&
+                docData.mciId is string &&
+                docData.experience is int &&
+                docData.verificationStatus is string &&
+                docData.specialisation is string &&
+                docData.qualifications is list &&
+                docData.clinicAddress is map &&
+                docData.languages is list &&
+                docData.get('imageUrl', '') is string &&
+                docData.get('mciUrl', '') is string &&
+                docData.get('totalConsults', 0) is int &&
+                docData.get('ratingsReceived', 0) is int &&
+                docData.get('consultFee', 0) is int &&
+                docData.get('avgRating', 0) is int &&
+                docData.get('workingSlots', {}) is map &&
+                docData.get('dailySlotKeys', []) is list &&
+                docData.get('weeklySlotKeys', {}) is map &&
+                docData.get('oneTimeSlotKeys', {}) is map &&
+                docData.get('bookedSlots', {}) is map;
+      }
+      allow read: if request.auth.uid != null;
+      allow update: if request.auth.uid == uid;
+      // allow update: if request.auth.uid == uid && editOnlyFields(
+      //   ["imageUrl","gender","languages","workingSlots","dailySlotKeys","weeklySlotKeys","oneTimeSlotKeys"]) && reviewDoctorFieldsAreValidTypes(request.resource.data);
+       allow create: if request.auth.uid == uid;
+      // allow create: if request.auth.uid == uid && 
+      // documentFieldsCheck(
+      //   ["doctorId", "name", "gender", "age","specialisation","mciId","experience","verificationStatus", "qualifications","clinicAddress","languages"],
+      // ["imageUrl", "mciUrl","totalConsults","ratingsReceived", "consultFee","avgRating", "workingSlots","dailySlotKeys","weeklySlotKeys","oneTimeSlotKeys","bookedSlots"])
+      // && reviewDoctorFieldsAreValidTypes(request.resource.data);
+     
+      match /PersonalData/{uid}{
+        allow read: if request.auth.uid == uid;
+        allow write: if request.auth.uid == uid;
+      }
+  
+      match /ActiveSlots/{slotId}{
+        allow read: if request.auth.uid != null;
+        allow write: if request.auth.uid != null;
+      }
+      match /ConsultFee/{feeRequestId}{
+        allow read: if request.auth.uid == uid;
+        allow write: if request.auth.uid == uid;
+      }
+    }
+
+    match /FCMTokens/{uid}{
+      allow read: if request.auth.uid == uid;
+      allow write: if request.auth.uid == uid;
+    }
+    
+     match /Templates/{uid}{
+      allow read: if request.auth.uid == uid;
+      allow write: if request.auth.uid == uid;
+    }
+    
+    match /CalendarEvents/{uid}{
+      allow read: if request.auth.uid == uid;
+      allow write: if request.auth.uid == uid;
+    }
+    
+    match /HelplinePrescriptions/{uid}{
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    }
+    
+    match /DoctorData/{uid}{
+      allow read: if request.auth.uid == uid;
+      allow write: if request.auth.uid == uid;
+    }
+    
+    match /calls/{uid}/{document=**} {
+      allow read: if request.auth !=null;
+      allow write: if request.auth !=null;
+    }
+    match /ConsultRooms/{uid}/{document=**} {
+      allow read: if request.auth !=null;
+      allow write: if request.auth !=null;
+    }
+    match /consults/{uid}/{document=**} {
+      allow read: if request.auth !=null;
+      allow write: if request.auth !=null;
+    }
+    match /patients/{uid}/{document=**} {
+      allow read: if request.auth !=null;
+      allow write: if request.auth !=null;
+    }
+    match /Admin/{uid}/{document=**} {
+      allow read: if request.auth !=null;
+      allow write: if request.auth !=null;
+    }
+  }
+}
