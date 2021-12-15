@@ -1,1 +1,73 @@
-<p>users works!</p>
+<div class="h-4rem" style="background: #f9faff;">
+  <div class="d-flex align-items-center justify-content-between h-100 container">
+    <p class="font-medium">User Management</p>
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input #globalSearch pInputText type="text" (input)="dt.filterGlobal(globalSearch.value, 'contains');" placeholder="Global Search" />
+    </span>
+  </div>
+</div>
+<section class="px-lg-7 pt-5 pb-0 pb-8 bg-neutral-gray">
+  <div class="container">
+    <ng-container>
+      <div class="row align-items-center no-gutters">
+        <div class="d-flex align-items-center justify-content-between h-100 container">
+          <div>
+            <p class="text-xl font-medium d-inline-block" style="border-right: 0.5px solid #f2f2f4;">All users &nbsp;</p> &nbsp;{{users.length}}
+          </div>
+          <button pButton pRipple label="Add New User" icon="pi pi-plus" class="w-12rem"></button>
+        </div>
+        <p-table #dt [value]="users" [(selection)]="selectedUsers" dataKey="id" styleClass="p-datatable-users" style="width: 100%;" [rowHover]="true"
+                 [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
+                 [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [filterDelay]="0" [globalFilterFields]="['name','user.name']">
+          <ng-template pTemplate="header">
+            <tr>
+              <!--<th style="width: 3rem"></th>-->
+              <th pSortableColumn="name">NAME <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="role" class="text-center">ROLE <p-sortIcon field="role"></p-sortIcon></th>
+              <th >STATUS </th>
+              <th >ACTIONS </th>
+              <th style="width: 8rem"></th>
+            </tr>
+
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr class="p-selectable-row">
+              <td>
+                <span class="p-column-title">Name</span>
+                <div class="d-flex align-items-center">
+                  <img src="assets/images/{{user.img}}" alt="Profile" height="52" style="border-radius: 50%;" class="mr-3">
+                  <div>
+                    <p class="text-xl font-semibold m-0 mb-2 text-black-alpha-90">{{user.name}}</p>
+                    <span class="image-text text-500" style="color: #8e8ea3;">{{user.username}}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="p-column-title">Role</span>
+                <span class="image-text role-text {{user.role}}">{{user.role}}</span>
+              </td>
+              <td>
+                <span class="p-column-title">Status</span>
+                <span class="image-text status-text {{user.status}}">&bullet; {{user.status}}</span>
+              </td>
+              <td>
+                <span class="p-column-title">Actions</span>
+                <span class="image-text" style="color: #8e8ea3;">Reset Password</span>
+              </td>
+              <td style="text-align: center">
+                <span class="image-text" style="color: #8e8ea3;"><i class="pi pi-trash pi-trash mr-2"></i>Delete</span>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">No users found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </ng-container>
+  </div>
+</section>

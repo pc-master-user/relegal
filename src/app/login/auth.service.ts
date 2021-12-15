@@ -17,7 +17,7 @@ export class AuthService {
 
   setAuthObj(user: any): void {
     this.userSubject.next(user);
-    if (user && user.token) {
+    if (user) {
       this.localStorage.setItem('user', JSON.stringify(user));
     }
   }

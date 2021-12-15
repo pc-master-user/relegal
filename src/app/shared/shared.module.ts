@@ -7,6 +7,9 @@ import {AppNavbarComponent} from "./components/app-navbar/app-navbar.component";
 import {RippleModule} from "primeng/ripple";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DropdownModule} from "primeng/dropdown";
+import {TableModule} from "primeng/table";
+import {MultiSelectModule} from "primeng/multiselect";
+import {ContextMenuModule} from "primeng/contextmenu";
 
 const materialModules = [
   FormsModule,
@@ -16,7 +19,10 @@ const materialModules = [
   DropdownModule,
   CheckboxModule,
   ButtonModule,
-  RippleModule
+  RippleModule,
+  TableModule,
+  MultiSelectModule,
+  ContextMenuModule
 ];
 
 @NgModule({
