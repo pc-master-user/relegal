@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "./auth.service";
+import {Router} from "@angular/router";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  private localStorage: Storage = window?.localStorage;
+  private unsubscribe$ = new Subject<void>();
   isLoading = false;
   checked = false;
+  isUserLoggedIn = false;
   selectedType = '';
   legalTypes!: any[];
   users: any[] = [];
@@ -20,9 +26,23 @@ export class LoginComponent implements OnInit {
     selectedType: new FormControl('', [Validators.required,]),
     rememberMe: new FormControl(false)
   });
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+    authService.getAuthObj().pipe(takeUntil(this.unsubscribe$)).subscribe( (data: any) => {
+      if (data && data?.username) {
+        this.isUserLoggedIn = true;
+      } else {
+        this.isUserLoggedIn = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
+    if (this.isUserLoggedIn) {
+      this.router.navigate(['/users']);
+    }
     this.legalTypes = [{name: 'Attorney', code: 'atr'}, {name: 'Paralegal', code: 'par'}, {name: 'Admin', code: 'admin'}]
      this.users = [{name: 'Ian Chesnut',username: 'ian.chesnut@gmail.com', password: 'Test@123', selectedType: 'Attorney', rememberMe: true},
       {name: 'Faith Robinson', username: 'faith.robinson@gmail.com', password: 'Test@123', selectedType: 'Paralegal', rememberMe: false},
@@ -46,5 +66,10 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     console.log(this.loginForm.value)
     this.users.push(this.loginForm.value)
+
+    // store user details and jwt token in local storage to keep user logged in between page refreshes
+    // const authData = {username: loginRequest.username, token: data.data.token, refreshToken: data.data.refreshToken, rememberMe: rememberMe };
+    this.authService.setAuthObj(this.loginForm.value)
+    this.router.navigate(['/users']);
   }
 }

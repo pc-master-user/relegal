@@ -3,4 +3,12 @@
     <img src="/assets/images/RelegalLogo.png" class="logo" alt="Relegal">
     <p class="logo-text d-inline-block">Relegal Solutions</p>
   </a>
+  <div class="dropdown" *ngIf="isUserLoggedIn">
+    <button class="dropbtn"><img src="assets/images/profileImage.png" alt="Profile" class=""></button>
+    <div class="dropdown-content">
+      <!--<a href="#">Link 1</a>-->
+      <!--<a href="#">Link 2</a>-->
+      <a href="#" (click)="signOut()">Sign out</a>
+    </div>
+  </div>
 </nav>
