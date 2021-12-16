@@ -16,13 +16,13 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   checked = false;
   isUserLoggedIn = false;
-  role = '';
+  role = 'Attorney';
   legalTypes!: any[];
   users: any[] = [];
   emailPattern = /^\w+([\+\_\.\-]\w+)*@\w+([\.-]\w+)*(\.\w{2,})+$/;
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email, Validators.pattern(this.emailPattern)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(7),]),
+    password: new FormControl('', [Validators.required,]),
     role: new FormControl('', [Validators.required,]),
     rememberMe: new FormControl(false)
   });
