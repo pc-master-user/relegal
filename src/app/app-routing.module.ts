@@ -11,6 +11,11 @@ const routes: Routes = [
     path: 'login',
     pathMatch: 'prefix',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'cases',
+    pathMatch: 'prefix',
+    loadChildren: () => import('./cases/cases.module').then(m => m.CasesModule)
   }
 ];
 

@@ -29,6 +29,8 @@ import {FileUploadModule} from "primeng/fileupload";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TabViewModule} from "primeng/tabview";
+import {MatNativeDateModule} from "@angular/material/core";
+
 
 const materialModules = [
   FormsModule,
@@ -59,7 +61,8 @@ const materialModules = [
   RadioButtonModule,
   InputNumberModule,
   InputTextareaModule,
-  TabViewModule
+  TabViewModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
