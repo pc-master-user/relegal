@@ -1,73 +1,219 @@
-<div class="h-4rem" style="background: #f9faff;">
-  <div class="d-flex align-items-center justify-content-between h-100 container">
-    <p class="font-medium">User Management</p>
-    <span class="p-input-icon-left">
+<div class="" style="background: #f9faff;">
+  <div class="d-flex align-items-center justify-content-between h-100 container position-relative">
+    <span class="p-input-icon-left position-absolute z-5" style="right: 12px; top: 8px;">
       <i class="pi pi-search"></i>
-      <input #globalSearch pInputText type="text" (input)="dt.filterGlobal(globalSearch.value, 'contains');" placeholder="Global Search" />
+      <input #globalSearch pInputText type="text" (input)="dt.filterGlobal(globalSearch.value, 'contains');" placeholder="Search Users" />
     </span>
-  </div>
-</div>
-<section class="px-lg-7 pt-5 pb-0 pb-8 bg-neutral-gray">
-  <div class="container">
-    <ng-container>
-      <div class="row align-items-center no-gutters">
-        <div class="d-flex align-items-center justify-content-between h-100 container">
-          <div>
-            <p class="text-xl font-medium d-inline-block" style="border-right: 0.5px solid #f2f2f4;">All users &nbsp;</p> &nbsp;{{users.length}}
-          </div>
-          <button pButton pRipple label="Add New User" icon="pi pi-plus" class="w-12rem"></button>
-        </div>
-        <p-table #dt [value]="users" [(selection)]="selectedUsers" dataKey="id" styleClass="p-datatable-users" style="width: 100%;" [rowHover]="true"
-                 [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
-                 [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                 [filterDelay]="0" [globalFilterFields]="['name','user.name']">
-          <ng-template pTemplate="header">
-            <tr>
-              <!--<th style="width: 3rem"></th>-->
-              <th pSortableColumn="name">NAME <p-sortIcon field="name"></p-sortIcon></th>
-              <th pSortableColumn="role" class="text-center">ROLE <p-sortIcon field="role"></p-sortIcon></th>
-              <th >STATUS </th>
-              <th >ACTIONS </th>
-              <th style="width: 8rem"></th>
-            </tr>
+    <p-tabView [activeIndex]="1" class="w-100 py-2">
+      <p-tabPanel [selected]="false" [disabled]="true">
+        <ng-template pTemplate = "header">
+          <span>Roles Management</span>
+        </ng-template>
+        Content 1
+      </p-tabPanel>
+      <p-tabPanel styleClass="p-tabview-selected" [selected]="true">
+        <ng-template pTemplate = "header">
+          <span>Users Management</span>
+        </ng-template>
+        <ng-container>
+          <div class="row align-items-center no-gutters">
+            <div class="d-flex align-items-center justify-content-between h-100 container">
+              <div>
+                <p class="text-xl font-medium d-inline-block" style="border-right: 1px solid #d4d4df;">All users &nbsp;</p> &nbsp;{{users.length}}
+              </div>
+              <!--<button pButton pRipple label="Add New User" icon="pi pi-plus" class="w-12rem"></button>-->
+            </div>
 
-          </ng-template>
-          <ng-template pTemplate="body" let-user>
-            <tr class="p-selectable-row">
-              <td>
-                <span class="p-column-title">Name</span>
-                <div class="d-flex align-items-center">
-                  <img src="assets/images/{{user.img}}" alt="Profile" height="52" style="border-radius: 50%;" class="mr-3">
-                  <div>
-                    <p class="text-xl font-semibold m-0 mb-2 text-black-alpha-90">{{user.name}}</p>
-                    <span class="image-text text-500" style="color: #8e8ea3;">{{user.username}}</span>
+
+
+            <p-toast></p-toast>
+
+            <div class="card w-100">
+              <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                  <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                  <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                  <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
+                  <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                </ng-template>
+              </p-toolbar>
+
+              <p-table #dt [value]="users" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+                       [(selection)]="selectedUsers" [rowHover]="true" dataKey="id"
+                       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                <!--<ng-template pTemplate="caption">-->
+                <!--<div class="p-d-flex p-ai-center p-jc-between">-->
+                <!--<h5 class="p-m-0">Manage Users</h5>-->
+                <!--<span class="p-input-icon-left">-->
+                <!--<i class="pi pi-search"></i>-->
+                <!--<input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--</ng-template>-->
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 3rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="role" class="text-center">Role <p-sortIcon field="role"></p-sortIcon></th>
+                    <th pSortableColumn="group" class="text-center">Groups <p-sortIcon field="group"></p-sortIcon></th>
+                    <th pSortableColumn="status" class="text-center">Status <p-sortIcon field="status"></p-sortIcon></th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                  <tr>
+                    <td>
+                      <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img src="assets/images/{{user.img}}" alt="Profile" height="52" style="border-radius: 50%;" class="mr-3">
+                        <div>
+                          <p class="text-xl font-semibold m-0 mb-2 text-black-alpha-90">{{user.name}}</p>
+                          <span class="image-text text-500" style="color: #8e8ea3;">{{user.username}}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <span class="image-text role-text {{user.role}}">{{user.role}}</span>
+                    </td>
+                    <td class="text-center"><span class="text-capitalize">{{user.group}}</span></td>
+                    <td class="text-center"><span [class]="'user-badge status-text ' + user.status.toLowerCase()">&bullet; {{user.status}}</span></td>
+                    <td class="text-center">
+                      <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(user)"></button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+
+            <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" styleClass="p-fluid">
+              <ng-template pTemplate="content">
+                <div class="text-center mb-2">
+                  <img [src]="'assets/images/' + user.img" [alt]="user.img" class="user-image" *ngIf="user.img">
+                </div>
+                <div class="p-field mb-3">
+                  <label for="name" class="d-inline-block mb-2">Name</label>
+                  <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
+                  <small class="p-invalid" *ngIf="submitted && !user.name">Name is required.</small>
+                </div>
+                <div class="p-field mb-3">
+                  <label for="username" class="d-inline-block mb-2">Email</label>
+                  <input type="text" id="username" pInputText [(ngModel)]="user.username" required />
+                </div>
+                <div class="p-field mb-3">
+                  <label for="password" class="d-inline-block mb-2">Password</label>
+                  <input type="password" id="password" pInputText [(ngModel)]="user.password" required />
+                </div>
+                <div class="p-field mb-3">
+                  <label class="p-mb-3" class="d-inline-block mb-2">Groups</label>
+                  <div class="p-formgrid p-grid">
+                    <div class="p-field-radiobutton p-col-6 d-inline-block mr-2">
+                      <p-radioButton id="group1" name="group" value="alpha" [(ngModel)]="user.group"></p-radioButton>
+                      <label for="group1" class="d-inline-block ml-1">Alpha</label>
+                    </div>
+                    <div class="p-field-radiobutton p-col-6 d-inline-block mr-2">
+                      <p-radioButton id="group2" name="group" value="beta" [(ngModel)]="user.group"></p-radioButton>
+                      <label for="group2" class="d-inline-block ml-1">Beta</label>
+                    </div>
+                    <div class="p-field-radiobutton p-col-6 d-inline-block mr-2">
+                      <p-radioButton id="group3" name="group" value="sigma" [(ngModel)]="user.group"></p-radioButton>
+                      <label for="group3" class="d-inline-block ml-1">Sigma</label>
+                    </div>
                   </div>
                 </div>
-              </td>
-              <td class="text-center">
-                <span class="p-column-title">Role</span>
-                <span class="image-text role-text {{user.role}}">{{user.role}}</span>
-              </td>
-              <td>
-                <span class="p-column-title">Status</span>
-                <span class="image-text status-text {{user.status}}">&bullet; {{user.status}}</span>
-              </td>
-              <td>
-                <span class="p-column-title">Actions</span>
-                <span class="image-text" style="color: #8e8ea3;">Reset Password</span>
-              </td>
-              <td style="text-align: center">
-                <span class="image-text" style="color: #8e8ea3;"><i class="pi pi-trash pi-trash mr-2"></i>Delete</span>
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="8">No users found.</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-    </ng-container>
+
+                <div class="p-formgrid p-grid d-flex">
+                  <div class="p-field p-col w-5 mb-2 mr-3">
+                    <label for="role" class="d-inline-block mb-2">Role</label>
+                    <p-dropdown [options]="legalTypes" [(ngModel)]="user.role" placeholder="Select " id="role" optionLabel="name" optionValue="name" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" class="w-full mb-3"></p-dropdown>
+                  </div>
+                  <div class="p-field p-col w-5 mb-2">
+                    <label for="status" class="d-inline-block mb-2">Status</label>
+                    <p-dropdown [options]="statuses" [(ngModel)]="user.status" placeholder="Select " id="status" optionLabel="name" optionValue="name" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" class="w-full mb-3"></p-dropdown>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
+              </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+
+
+
+
+
+
+            <!--<p-table #dt [value]="users" [(selection)]="selectedUsers" dataKey="id" styleClass="p-datatable-users" [rowHover]="true"-->
+            <!--[rows]="10" [showCurrentPageReport]="true" [loading]="loading"-->
+            <!--[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"-->
+            <!--[filterDelay]="0" [globalFilterFields]="['name','user.name']">-->
+            <!--<ng-template pTemplate="header">-->
+            <!--<tr>-->
+            <!--&lt;!&ndash;<th style="width: 3rem"></th>&ndash;&gt;-->
+            <!--<th pSortableColumn="name">NAME <p-sortIcon field="name"></p-sortIcon></th>-->
+            <!--<th pSortableColumn="role" class="text-center">ROLE <p-sortIcon field="role"></p-sortIcon></th>-->
+            <!--<th >STATUS </th>-->
+            <!--<th >ACTIONS </th>-->
+            <!--<th style="width: 8rem;"></th>-->
+            <!--</tr>-->
+
+            <!--</ng-template>-->
+            <!--<ng-template pTemplate="body" let-user>-->
+            <!--<tr class="p-selectable-row">-->
+            <!--<td>-->
+            <!--<span class="p-column-title">Name</span>-->
+            <!--<div class="d-flex align-items-center">-->
+            <!--<img src="assets/images/{{user.img}}" alt="Profile" height="52" style="border-radius: 50%;" class="mr-3">-->
+            <!--<div>-->
+            <!--<p class="text-xl font-semibold m-0 mb-2 text-black-alpha-90">{{user.name}}</p>-->
+            <!--<span class="image-text text-500" style="color: #8e8ea3;">{{user.username}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--<td class="text-center">-->
+            <!--<span class="p-column-title">Role</span>-->
+            <!--<span class="image-text role-text {{user.role}}">{{user.role}}</span>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<span class="p-column-title">Status</span>-->
+            <!--<span class="image-text status-text {{user.status}}">&bullet; {{user.status}}</span>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<span class="p-column-title">Actions</span>-->
+            <!--<span class="image-text" style="color: #8e8ea3;">Reset Password</span>-->
+            <!--</td>-->
+            <!--<td style="text-align: center">-->
+            <!--<span class="image-text" style="color: #8e8ea3;"><i class="pi pi-trash pi-trash mr-2"></i>Delete</span>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--</ng-template>-->
+            <!--<ng-template pTemplate="emptymessage">-->
+            <!--<tr>-->
+            <!--<td colspan="8">No users found.</td>-->
+            <!--</tr>-->
+            <!--</ng-template>-->
+            <!--</p-table>-->
+          </div>
+        </ng-container>
+      </p-tabPanel>
+      <p-tabPanel [disabled]="true">
+        <ng-template pTemplate = "header">
+          <span>Group Management</span>
+        </ng-template>
+        Content 3
+      </p-tabPanel>
+    </p-tabView>
   </div>
-</section>
+</div>
