@@ -1,2 +1,50 @@
-<app-app-navbar></app-app-navbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container >
+    <mat-sidenav class="mat-elevation-z8 p-d-flex example-sidenav align-items-center text-center justify-content-between" role="navigation" #sidenav mode="side" opened fixedInViewport="true" >
+        <a href="/" class="p-d-flex p-flex-column p-flex-md-row  text-decoration-none">
+            <img src="/assets/images/RelegalLogo.png" class="logo" alt="Relegal">
+            <span class="logo-text p-mx-auto">Relegal Solutions</span>
+        </a>
+
+        <div class="p-d-flex p-flex-column p-flex-md-row text-decoration-none btn-toolbar my-8">
+            <div class="my-4 p-elevation-1">
+                <button mat-icon-button color="white" aria-label="Example icon button with a home icon" >
+                    <mat-icon style="font-size: 36px;" [inline]="true" [routerLink]="['/cases']" routerLinkActive="active-link">gavel</mat-icon>
+                </button>
+            </div>
+            <div class="my-4 p-elevation-1">
+                <button mat-icon-button color="white" aria-label="Example icon button with a home icon"
+                    routerLinkActive="active-link">
+                    <mat-icon style="font-size: 32px;" [inline]="true" [routerLink]="['/calendar']">calendar_today</mat-icon>
+                </button>
+            </div>
+            <div class="my-4 p-elevation-1">
+                <button mat-icon-button color="white" aria-label="Example icon button with a home icon"
+                    routerLinkActive="active-link">
+                    <mat-icon style="font-size: 36px;" [inline]="true" [routerLink]="['/users']">people</mat-icon>
+                </button>
+            </div>
+            <div class="my-4 p-elevation-1">
+                <button mat-icon-button color="white" aria-label="Example icon button with a home icon"
+                    routerLinkActive="active-link">
+                    <mat-icon style="font-size: 36px;" [inline]="true" [routerLink]="['/stats']">query_stats</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="inner-content text-center" *ngIf="isUserLoggedIn">
+            <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/80x80" />
+            <p class="name">John Smith</p>
+            <p class="designation">Software Engineer</p>
+            <!-- <div class="p-elevation-1 logout">
+                <button mat-icon-button color="" aria-label="Example icon button with a home icon"
+                    routerLinkActive="active-link">
+                    <mat-icon style="font-size: 36px;" [inline]="true" (click)="signOut()" [routerLink]="['/users']">power_settings_new</mat-icon>
+                </button>
+            </div> -->
+            <button pButton pRipple type="button" icon="pi pi-power-off" class="p-button-text logout p-button-secondary" (click)="signOut()"
+                routerLinkActive="p-button-info"></button>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content role="main">
+        <div class="mat-elevation-z8"><router-outlet></router-outlet></div></mat-sidenav-content>
+</mat-sidenav-container>

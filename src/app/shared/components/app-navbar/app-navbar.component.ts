@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../login/auth.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-app-navbar',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class AppNavbarComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
+  display: boolean = true;
   isUsersPage!:boolean;
   constructor(
     private authService: AuthService,

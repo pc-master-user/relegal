@@ -9,11 +9,18 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DropdownModule} from "primeng/dropdown";
 import {TableModule} from "primeng/table";
 import {MultiSelectModule} from "primeng/multiselect";
-import {ContextMenuModule} from "primeng/contextmenu";
+import { ContextMenuModule } from "primeng/contextmenu";
+import { SidebarModule } from 'primeng/sidebar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DockModule } from 'primeng/dock';
+import { MenuModule } from 'primeng/menu';
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 const materialModules = [
   FormsModule,
   ReactiveFormsModule,
+  MatSidenavModule,
   InputTextModule,
   ButtonModule,
   DropdownModule,
@@ -22,7 +29,12 @@ const materialModules = [
   RippleModule,
   TableModule,
   MultiSelectModule,
-  ContextMenuModule
+  ContextMenuModule,
+  SidebarModule,
+  DockModule,
+  MenuModule,
+  MatButtonModule,
+  MatIconModule
 ];
 
 @NgModule({
@@ -30,7 +42,8 @@ const materialModules = [
     AppNavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ...materialModules
   ],
   exports: [
     ...materialModules,
