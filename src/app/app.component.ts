@@ -52,7 +52,8 @@ export class AppComponent implements OnInit {
    signOut(): void {
     this.authService.setAuthObj({});
     // this.localStorage.removeItem('user')
-    this.isUserLoggedIn = false;
+     this.isUserLoggedIn = false;
+     this.router.navigate(['/']);
   }
   private localStorage: Storage = window?.localStorage;
   isUserLoggedIn!: boolean;

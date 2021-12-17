@@ -1,5 +1,5 @@
-<section class="px-lg-7 pt-4 pb-0 pb-4" style="background-color: #CCCEDB;">
-  <div class="container login-section">
+<section class="pb-0 pb-4 d-flex h-100" style="background-color: #CCCEDB;">
+  <div class="container login-section align-self-center" >
     <ng-container>
       <div class="row align-items-center no-gutters">
         <div class="col-12 px-2 md-border-l">
@@ -14,8 +14,9 @@
               <div class="input-field">
                 <label for="email1" class="input-title block text-900 font-medium mb-2">Email</label>
                 <input id="email1" type="text" pInputText formControlName="username" autocomplete="none"
-                       [class.error]="username.touched && (username.invalid)"
-                       [class.verified]="username.valid && username.touched" placeholder="jane.doe@relegal.com" class="w-full mb-3">
+                  [class.error]="username.touched && (username.invalid)"
+                  [class.verified]="username.valid && username.touched" placeholder="jane.doe@relegal.com"
+                  class="w-full mb-3">
               </div>
               <div>
                 <label for="password1" class="block text-900 font-medium mb-2">Password</label>
@@ -23,17 +24,21 @@
               </div>
               <div class="mb-3">
                 <label for="password1" class="block text-900 font-medium mb-2">Login as</label>
-                <p-dropdown [options]="legalTypes" [(ngModel)]="role" placeholder="Select " formControlName="role" optionLabel="name" optionValue="name" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" class="w-full mb-3"></p-dropdown>
+                <p-dropdown [options]="legalTypes" [(ngModel)]="role" placeholder="Select " formControlName="role"
+                  optionLabel="name" optionValue="name" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"
+                  class="w-full mb-3"></p-dropdown>
               </div>
-
+  
               <div class="flex align-items-center justify-content-between mb-6">
                 <div class="flex align-items-center">
-                  <p-checkbox inputId="rememberMe1" [binary]="true" [(ngModel)]="checked" formControlName="rememberMe" styleClass="mr-2">Remember me</p-checkbox>
-                  <label for="rememberMe1">Remember me</label> 
+                  <p-checkbox inputId="rememberMe1" [binary]="true" [(ngModel)]="checked" formControlName="rememberMe"
+                    styleClass="mr-2">Remember me</p-checkbox>
+                  <label for="rememberMe1">Remember me</label>
                 </div>
                 <!--<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>-->
               </div>
-              <button pButton pRipple label="Sign In" icon="pi pi-user" [loading]="isLoading" [disabled]="loginForm.invalid" class="w-full"></button>
+              <button pButton pRipple label="Sign In" icon="pi pi-user" [loading]="isLoading"
+                [disabled]="loginForm.invalid" class="w-full"></button>
             </form>
           </div>
         </div>
@@ -41,3 +46,4 @@
     </ng-container>
   </div>
 </section>
+

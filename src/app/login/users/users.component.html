@@ -31,7 +31,7 @@
             <div class="card w-100">
               <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-                  <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                  <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button-primary mr-2" (click)="openNew()"></button>
                   <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
                 </ng-template>
 
@@ -44,15 +44,7 @@
               <p-table #dt [value]="users" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
                        [(selection)]="selectedUsers" [rowHover]="true" dataKey="id"
                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-                <!--<ng-template pTemplate="caption">-->
-                <!--<div class="p-d-flex p-ai-center p-jc-between">-->
-                <!--<h5 class="p-m-0">Manage Users</h5>-->
-                <!--<span class="p-input-icon-left">-->
-                <!--<i class="pi pi-search"></i>-->
-                <!--<input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />-->
-                <!--</span>-->
-                <!--</div>-->
-                <!--</ng-template>-->
+                
                 <ng-template pTemplate="header">
                   <tr>
                     <th style="width: 3rem">
@@ -74,7 +66,7 @@
                       <div class="d-flex align-items-center">
                         <img src="assets/images/{{user.img}}" alt="Profile" height="52" style="border-radius: 50%;" class="mr-3">
                         <div>
-                          <p class="text-xl font-semibold m-0 mb-2 text-black-alpha-90">{{user.name}}</p>
+                          <p class="text-xl font-medium m-0 mb-2 text-black-alpha-90">{{user.name}}</p>
                           <span class="image-text text-500" style="color: #8e8ea3;">{{user.username}}</span>
                         </div>
                       </div>
@@ -85,8 +77,8 @@
                     <td class="text-center"><span class="text-capitalize">{{user.group}}</span></td>
                     <td class="text-center"><span [class]="'user-badge status-text ' + user.status.toLowerCase()">&bullet; {{user.status}}</span></td>
                     <td class="text-center">
-                      <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(user)"></button>
-                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(user)"></button>
+                      <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text mr-2" (click)="editUser(user)" style="color: #003050;"></button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-secondary p-button-text" (click)="deleteUser(user)"></button>
                     </td>
                   </tr>
                 </ng-template>
