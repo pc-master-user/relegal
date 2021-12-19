@@ -1,26 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Use only these utilities from Bootstrap
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 // Adding extra spacing properties
 $spacers: (
-  0: 0, // 0
-  1: ($spacer * .25), // 4px
-  2: ($spacer * .5), // 8px
-  3: ($spacer * .75), // 12px
-  4: ($spacer * 1), // 16px
-  5: ($spacer * 1.5), // 24px
-  6: ($spacer * 2), // 32px
-  7: ($spacer * 3), // 48px
-  8: ($spacer * 4), // 64px
-  9: ($spacer * 5.25), // 84px
+  0: 0,
+  // 0
+  1:
+    (
+      $spacer * 0.25,
+    ),
+  // 4px
+  2:
+    (
+      $spacer * 0.5,
+    ),
+  // 8px
+  3:
+    (
+      $spacer * 0.75,
+    ),
+  // 12px
+  4:
+    (
+      $spacer * 1,
+    ),
+  // 16px
+  5:
+    (
+      $spacer * 1.5,
+    ),
+  // 24px
+  6:
+    (
+      $spacer * 2,
+    ),
+  // 32px
+  7:
+    (
+      $spacer * 3,
+    ),
+  // 48px
+  8:
+    (
+      $spacer * 4,
+    ),
+  // 64px
+  9:
+    (
+      $spacer * 5.25,
+    ),
+  // 84px
 );
 
 $grid-gutter-width: 24px;
-@import '~bootstrap/scss/grid';
-@import '~bootstrap/scss/alert';
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/utilities/align";
 @import "~bootstrap/scss/utilities/clearfix";
 @import "~bootstrap/scss/utilities/display";
@@ -42,8 +79,8 @@ $grid-gutter-width: 24px;
 }
 
 ::selection {
-  background-color: #427BFF;
-  color: #FFFFFF;
+  background-color: #427bff;
+  color: #ffffff;
 }
 
 html {
@@ -58,7 +95,7 @@ html,
 body {
   height: 100%;
   scroll-behavior: smooth;
-  @media(max-width: 991px){
+  @media (max-width: 991px) {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
@@ -67,24 +104,27 @@ body {
 body {
   background-color: #faf9fa;
   margin: 0;
-  font-family: HK Grotesk, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: HK Grotesk, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
 }
 
 body * {
   // For devices below 992px, which are mostly touch enabled or apple devices, the native slim scroll will be used
-  scrollbar-color: #D5D3DD #F8F8FB;
+  scrollbar-color: #d5d3dd #f8f8fb;
 
   &::-webkit-scrollbar-thumb {
-    background-color: #D5D3DD;
+    background-color: #d5d3dd;
 
-    &:hover, &:active {
-      background-color: #B1AFB9;
+    &:hover,
+    &:active {
+      background-color: #b1afb9;
     }
   }
 
   &::-webkit-scrollbar-track {
-    border: 1px solid #E6E4EF;
-    background-color: #F8F8FB;
+    border: 1px solid #e6e4ef;
+    background-color: #f8f8fb;
   }
 
   // For devices above 992px, provide slim UI for scrollbars
@@ -103,5 +143,11 @@ body * {
   //}
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", sans-serif;
+}

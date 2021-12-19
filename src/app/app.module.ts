@@ -12,7 +12,6 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {HttpClientModule} from "@angular/common/http";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import {SidebarModule} from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import {SidebarModule} from 'primeng/sidebar';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    SidebarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

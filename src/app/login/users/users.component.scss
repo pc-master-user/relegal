@@ -31,10 +31,6 @@
   border-radius: 50%;
 }
 
-.p-button.p-button-primary {
-  background-color: #003050;
-}
-
 ::ng-deep {
   .p-button-icon.pi {
     font-size: 1.2rem !important;
@@ -42,6 +38,12 @@
   .p-datatable-users.p-datatable .p-datatable-thead > tr > th {
     background-color: #f9faff;
     font-weight: 600;
+  }
+  .p-button.p-button-primary {
+    background-color: #003050;
+  }
+  .p-button.p-button-secondary {
+    background-color: #8c632e;
   }
   .p-paginator-prev .p-paginator-icon {
     &::before {
@@ -110,7 +112,7 @@
   .p-tabview-nav-content li {
     width: 180px;
     &:nth-last-child(2) {
-      //width: calc(100% - 360px)
+      width: calc(100% - 360px);
     }
     .p-tabview-nav-link {
       padding-right: 0px !important;

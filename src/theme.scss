@@ -1,0 +1,76 @@
+$secondary-palette: (
+  50: #f1ece6,
+  100: #ddd0c0,
+  200: #c6b197,
+  300: #af926d,
+  400: #9d7a4d,
+  500: #8c632e,
+  600: #845b29,
+  700: #795123,
+  800: #6f471d,
+  900: #5c3512,
+  A100: #ffc394,
+  A200: #ffa761,
+  A400: #ff8a2e,
+  A700: #ff7c14,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+$primary-palette: (
+  50: #e0e6ea,
+  100: #b3c1cb,
+  200: #8098a8,
+  300: #4d6e85,
+  400: #264f6a,
+  500: #003050,
+  600: #002b49,
+  700: #002440,
+  800: #001e37,
+  900: #001327,
+  A100: #629aff,
+  A200: #2f7aff,
+  A400: #005afb,
+  A700: #0051e1,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+@use "@angular/material" as mat;
+@import "~@angular/material/theming";
+@include mat-core();
+
+$primary: mat-palette($primary-palette);
+$accent: mat-palette($secondary-palette);
+
+$my-theme: mat-light-theme($primary, $accent);
+@include mat.core-theme($my-theme);
+@include mat.button-theme($my-theme);
+@include angular-material-theme($my-theme);

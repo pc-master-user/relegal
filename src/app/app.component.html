@@ -7,24 +7,24 @@
 
         <div class="p-d-flex p-flex-column p-flex-md-row text-decoration-none btn-toolbar my-8" *ngIf="isUserLoggedIn">
             <div class="my-4 p-elevation-1">
-                <button mat-icon-button  aria-label="Example icon button with a home icon" >
+                <button pTooltip="Cases" mat-icon-button  aria-label="Example icon button with a home icon" >
                     <mat-icon color="white" style="font-size: 36px;" [inline]="true" [routerLink]="['/cases']" routerLinkActive="active-link">gavel</mat-icon>
                 </button>
             </div>
             <div class="my-4 p-elevation-1">
-                <button mat-icon-button color="white" aria-label="Example icon button with a home icon"
+                <button pTooltip="Calendar" mat-icon-button color="white" aria-label="Example icon button with a home icon"
                     routerLinkActive="active-link">
                     <mat-icon style="font-size: 32px;" [inline]="true" [routerLink]="['/calendar']">calendar_today</mat-icon>
                 </button>
             </div>
             <div class="my-4 p-elevation-1">
-                <button mat-icon-button color="white" aria-label="Example icon button with a home icon"
+                <button pTooltip="Users" mat-icon-button color="white" aria-label="Example icon button with a home icon"
                     routerLinkActive="active-link">
                     <mat-icon color="white" style="font-size: 36px;" [inline]="true" [routerLink]="['/users']">people</mat-icon>
                 </button>
             </div>
             <div class="my-4 p-elevation-1">
-                <button mat-icon-button  aria-label="Example icon button with a home icon"
+                <button pTooltip="Reports" mat-icon-button  aria-label="Example icon button with a home icon"
                     routerLinkActive="active-link">
                     <mat-icon color="white" style="font-size: 36px;" [inline]="true" [routerLink]="['/stats']">query_stats</mat-icon>
                 </button>

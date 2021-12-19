@@ -1,1 +1,70 @@
-<p>cases works!</p>
+<div class="mx-4 my-4">
+
+<div class="d-flex justify-content-between my-1">
+    <h1 class="mt-1">
+        Cases
+    </h1>
+    <button mat-raised-button color="accent" (click)="showDialog()"><mat-icon>add</mat-icon> New Case</button>
+</div>
+<p-dialog header="Title" [(visible)]="display" [style]="{width: '50vw'}" [maximizable]="true">
+    Content
+</p-dialog>
+<div >
+    <p-dataView #dv [value]="legalCases" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
+        [sortOrder]="sortOrder" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="d-flex flex-row justify-content-between">
+                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
+                    (onChange)="onSortChange($event)" styleClass="mb-2 mb-md-0"></p-dropdown>
+                <span class="p-input-icon-left mb-2 mb-md-0">
+                    <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by Name"  (input)= "onTextChange($event,dv)"  [(ngModel)]="filter">
+                </span>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </ng-template>
+        <ng-template let-case pTemplate="listItem">
+            <div class="col-12">
+                <div class="case-list-item">
+                    <div class="case-list-detail">
+                        <div class="case-name">{{case.name}}</div>
+                        <div class="case-description">{{case.description}}</div>
+                        <i class="pi pi-tag case-category-icon"></i><span
+                            class="case-category">{{case.category}}</span>
+                    </div>
+                    <div class="case-list-action">
+                        <span class="case-price">${{case.price}}</span>
+                        <p-button icon="pi pi-shopping-cart" label="Add to Cart"
+                            [disabled]="case.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                        <span
+                            [class]="'case-badge status-' + case.inventoryStatus.toLowerCase()">{{case.inventoryStatus}}</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-product pTemplate="gridItem">
+            <div class="col-4 md-4">
+                <div class="case-grid-item card">
+                    <div class="case-grid-item-top">
+                        <div>
+                            <i class="pi pi-tag case-category-icon"></i>
+                            <span class="case-category">{{product.category}}</span>
+                        </div>
+                        <span
+                            [class]="'case-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+                    </div>
+                    <div class="case-grid-item-content">
+                        <div class="case-name">{{product.name}}</div>
+                        <div class="case-description">{{product.description}}</div>
+                    </div>
+                    <div class="case-grid-item-bottom">
+                        <span class="case-price">${{product.price}}</span>
+                        <p-button icon="pi pi-shopping-cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'">
+                        </p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>
+

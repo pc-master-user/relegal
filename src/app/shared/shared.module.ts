@@ -29,10 +29,34 @@ import {FileUploadModule} from "primeng/fileupload";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TabViewModule} from "primeng/tabview";
-import {MatNativeDateModule} from "@angular/material/core";
+import { MatNativeDateModule } from "@angular/material/core";
+import {CardModule} from 'primeng/card';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list'
+
+import {DataViewModule} from 'primeng/dataview';
+
+import {PanelModule} from 'primeng/panel';
+
+import {RatingModule} from 'primeng/rating';
+import {TooltipModule} from 'primeng/tooltip';
 
 
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
 const materialModules = [
+  TooltipModule,
+  PanelModule,
+  RatingModule,
+  DataViewModule,
+  FullCalendarModule,
   FormsModule,
   ReactiveFormsModule,
   MatSidenavModule,
@@ -40,7 +64,6 @@ const materialModules = [
   ButtonModule,
   DropdownModule,
   CheckboxModule,
-  ButtonModule,
   RippleModule,
   TableModule,
   MultiSelectModule,
@@ -62,7 +85,8 @@ const materialModules = [
   InputNumberModule,
   InputTextareaModule,
   TabViewModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  CardModule
 ];
 
 @NgModule({

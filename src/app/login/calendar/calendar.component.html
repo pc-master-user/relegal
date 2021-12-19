@@ -1,1 +1,56 @@
-<p>calendar works!</p>
+<!-- <div class='demo-app'>
+    <div class='demo-app-sidebar'>
+        
+    </div>
+
+    <div class='demo-app-main'>
+        <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'></full-calendar>
+    </div>
+
+</div> -->
+
+<mat-drawer-container class="demo-app">
+    <mat-drawer #sidenav class="demo-app-sidebar" mode="side" [(opened)]="opened">
+        <div class='demo-app-sidebar-section'>
+                
+            
+            <div class="d-flex justify-content-between align-content-center">
+                <h2 class="mt-1">Instructions</h2>
+                
+            <button mat-icon-button class="menubutton" (click)="sidenav.toggle()" aria-label="Example icon button with a menu icon">
+                <mat-icon>close</mat-icon>
+            </button>
+            </div>
+            <div class="d-flex ">
+                <div>Item 1</div>
+                <div>Item 2</div>
+            </div>
+            <ul>
+                <li>Select dates and you will be prompted to create a new event</li>
+                <li>Drag, drop, and resize events</li>
+                <li>Click an event to delete it</li>
+            </ul>
+        </div>
+        <div class='demo-app-sidebar-section'>
+            <label>
+                <input type='checkbox' [checked]='calendarOptions.weekends' (change)='handleWeekendsToggle()' />
+                toggle weekends
+            </label>
+        </div>
+        <div class='demo-app-sidebar-section'>
+            <h2>All Events ({{currentEvents.length}})</h2>
+            <ul>
+                <li *ngFor='let event of currentEvents'>
+                    <b>{{event.startStr}}</b>
+                    <i>{{event.title}}</i>
+                </li>
+            </ul>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class='demo-app-main'>
+        <button mat-icon-button class="menubutton" (click)="sidenav.toggle()" aria-label="Example icon button with a menu icon">
+            <mat-icon >menu</mat-icon>
+        </button>
+        <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'></full-calendar>
+    </mat-drawer-content>
+</mat-drawer-container>
