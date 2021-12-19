@@ -31,7 +31,12 @@ export interface Investor {
     name?: string;
     loanNumber?: String;
 }
-
+export interface County { 
+    id: number;
+    name: string;
+    district: number;
+    division: number;
+}
 export interface Matter{ 
     id?: string;
     caseType?: string;

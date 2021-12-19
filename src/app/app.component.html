@@ -1,11 +1,11 @@
 <mat-sidenav-container class="h-100">
     <mat-sidenav class="mat-elevation-z8 p-d-flex example-sidenav align-items-center text-center justify-content-between" role="navigation" #sidenav mode="side" opened fixedInViewport="true" >
-        <a href="/" class="p-d-flex p-flex-column p-flex-md-row  text-decoration-none">
+        <a href="/" class=" text-decoration-none">
             <img src="/assets/images/RelegalLogo.png" class="logo" alt="Relegal">
             <span class="logo-text p-mx-auto">Relegal Solutions</span>
         </a>
 
-        <div class="p-d-flex p-flex-column p-flex-md-row text-decoration-none btn-toolbar my-8" *ngIf="isUserLoggedIn">
+        <div class=" text-decoration-none btn-toolbar my-8" *ngIf="isUserLoggedIn">
             <div class="my-4 p-elevation-1">
                 <button pTooltip="Cases" mat-icon-button  aria-label="Example icon button with a home icon" >
                     <mat-icon color="white" style="font-size: 36px;" [inline]="true" [routerLink]="['/cases']" routerLinkActive="active-link">gavel</mat-icon>
