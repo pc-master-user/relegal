@@ -46,8 +46,9 @@ import {RatingModule} from 'primeng/rating';
 import { TooltipModule } from 'primeng/tooltip';
 import {MatListModule} from "@angular/material/list";
 import {TabMenuModule} from "primeng/tabmenu";
-import {TimelineModule} from "primeng/timeline";
+import { TimelineModule } from "primeng/timeline";
 
+import { ChipModule } from 'primeng/chip';
 
 
 FullCalendarModule.registerPlugins([
@@ -57,7 +58,9 @@ FullCalendarModule.registerPlugins([
   interactionPlugin
 ])
 const materialModules = [
+  
   TooltipModule,
+  ChipModule,
   DividerModule,
   PanelModule,
   RatingModule,

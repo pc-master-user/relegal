@@ -1,4 +1,8 @@
 :host ::ng-deep {
+  .p-card {
+    border-radius: 8px !important;
+    background-color: #fcfdf5 !important;
+  }
   .p-button-icon.pi {
     font-size: 1.2rem !important;
   }
@@ -20,6 +24,9 @@
   .case-name {
     font-size: 1.5rem;
     font-weight: 700;
+  }
+  .case-badge {
+    padding: 4px;
   }
 
   .case-description {
@@ -67,9 +74,22 @@
       margin-bottom: 0.5rem;
     }
   }
+  .status-active {
+    background-color: rgb(120, 223, 120) !important;
+    padding: 4px 8px !important;
+  }
+  .status-hold {
+    font-size: 12px;
+    background-color: grey !important;
+    padding: 0.25rem 0.75rem !important;
+  }
+  .status-closed {
+    background-color: rgb(216, 97, 97) !important;
+    padding: 0.25rem 0.75rem !important;
+  }
 
   .case-grid-item {
-    margin: 0.5em;
+    margin: 0.25em;
     border: 1px solid #dee2e6;
 
     .case-grid-item-top,
@@ -86,8 +106,8 @@
     }
 
     .case-grid-item-content {
-      text-align: center;
-      margin: 2rem 0;
+      text-align: left;
+      margin: 2px 2px 0px 12px;
     }
 
     .case-price {
@@ -95,6 +115,11 @@
       font-weight: 600;
     }
   }
+}
+
+.case-type-label {
+  font-size: 16px;
+  font-weight: 600;
 }
 .case-dialog {
   width: 400px;

@@ -17,10 +17,6 @@
                 <p-dropdown [options]="statusOptions" [(ngModel)]="caseStatus" placeholder="Case Status" (onChange)="onSortChange()"
                         styleClass="mb-2 mb-md-0"></p-dropdown>
                 <p-calendar [(ngModel)]="dateRange" (onSelect)="onSortChange()"  placeholder="Date range" dateFormat="dd/mm/yy" selectionMode="range"></p-calendar>
-                <span class="p-input-icon-left mb-2 mb-md-0">
-                    <i class="pi pi-search"></i>
-                    <input type="search" pInputText placeholder="Search by Client Name"  (input)= "onTextChange($event,dv)"  [(ngModel)]="filter">
-                </span>
                 <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
             </div>
         </ng-template>
@@ -44,26 +40,37 @@
             </div>
         </ng-template> -->
         <ng-template let-product pTemplate="gridItem">
-            <div class="col-4 md-4">
-                <div class="case-grid-item card">
-                    <div class="case-grid-item-top">
-                        <div>
-                            <span class="case-category"># 21-0001</span>
-                        </div>
-                        <span
-                            [class]="'case-badge status-' + product.status.toLowerCase()">{{product.status}}</span>
-                    </div>
-                    <div class="case-grid-item-content">
-                        <!-- <div class="case-name">{{product.id}}</div> -->
-                        <div class="case-description">{{product.caseType}}</div>
-                    </div>
-                    <!-- <div class="case-grid-item-bottom">
-                        <span class="case-price">${{product.price}}</span>
-                        <p-button icon="pi pi-shopping-cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'">
-                        </p-button>
-                    </div> -->
+            <p-card class="col-4 md-4 mb-4">
+                <div class="ml-2 mb-1 case-type-label">
+                    #21-0001
                 </div>
-            </div>
+                <div class="p-d-inline-flex p-col-12">
+                    <div class="mr-2 case-type-label">Case Type:</div>
+                    <div>{{product.caseType}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                    <div class="mr-2 case-type-label">defendent :</div>
+                    <div>{{product.defendantName}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                    <div class="mr-2 case-type-label">Attorney :</div>
+                    <div>{{product.attorney}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                    <div class="mr-2 case-type-label">Paralegal :</div>
+                    <div>{{product.paralegal}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                    <div class="mr-2 case-type-label">createdDate :</div>
+                    <div>{{toDateString(product.createdDate.toDate())}}</div>
+                </div>
+                
+                <ng-template pTemplate="footer">
+                    <p-chip class="p-col-12 mt-1" [styleClass]="' status-' + product.status.toLowerCase()">
+                        <span>{{product.status}}</span>
+                    </p-chip>
+                </ng-template>
+            </p-card>
         </ng-template>
     </p-dataView>
 </div>
