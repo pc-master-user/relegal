@@ -36,13 +36,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list'
+import {DividerModule} from 'primeng/divider';
 
 import {DataViewModule} from 'primeng/dataview';
 
 import {PanelModule} from 'primeng/panel';
 
 import {RatingModule} from 'primeng/rating';
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 
 FullCalendarModule.registerPlugins([
@@ -53,6 +55,7 @@ FullCalendarModule.registerPlugins([
 ])
 const materialModules = [
   TooltipModule,
+  DividerModule,
   PanelModule,
   RatingModule,
   DataViewModule,
@@ -95,7 +98,7 @@ const materialModules = [
   ],
   imports: [
     CommonModule,
-    ...materialModules
+    ...materialModules,
   ],
   exports: [
     ...materialModules,

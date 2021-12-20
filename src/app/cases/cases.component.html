@@ -1,14 +1,12 @@
 <div class="mx-4 my-4">
-
 <div class="d-flex justify-content-between my-1">
     <h1 class="mt-1">
         Cases
     </h1>
     <button mat-raised-button color="accent" (click)="showDialog()"><mat-icon>add</mat-icon> New Case</button>
 </div>
-<p-dialog header="Add Case" [(visible)]="display" [style]="{width: '80vw'}" [maximizable]="true">
-    <app-add-case></app-add-case>
-</p-dialog>
+<app-add-case [display]="display"(closeDialog)="closeDialog()"></app-add-case>
+
 <div >
     <p-dataView #dv [value]="legalCases" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
         [sortOrder]="sortOrder" layout="grid">

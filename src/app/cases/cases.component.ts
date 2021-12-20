@@ -14,7 +14,9 @@ export class CasesComponent implements OnInit {
     showDialog() {
         this.display = true;
     }
-
+    closeDialog() {
+        this.display = false;
+    }
    legalCases!: Case[];
 
     sortOptions!: SelectItem[];

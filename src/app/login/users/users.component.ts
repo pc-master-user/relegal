@@ -43,7 +43,6 @@ export class UsersComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private primengConfig: PrimeNGConfig,
-    
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {

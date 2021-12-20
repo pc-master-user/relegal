@@ -28,7 +28,7 @@ export interface Client {
     loanNumber?: String;
 }
 export interface Investor { 
-    name?: string;
+    code?: string;
     loanNumber?: String;
 }
 export interface County { 
@@ -48,8 +48,6 @@ export interface Matter{
     attorney?: string;
     parallegal?: string;
     judge?: string;
-    district?: string;
-    division?: string;
     isContested?: boolean;
     createdDate?: Date;
     updatedDate?: Date;
