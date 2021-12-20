@@ -43,15 +43,11 @@
         </ng-template>
       </p-timeline>
     </mat-sidenav>
-    <div class="d-flex justify-content-between px-2 mt-2">
+    <div class="d-flex px-2 mt-2 sticky-div">
       <button mat-icon-button class="menubutton" (click)="letNav.toggle()">
         <mat-icon >menu</mat-icon>
       </button>
-      <!--<button mat-icon-button class="menubutton" (click)="toggle">-->
-        <!--<mat-icon >menu</mat-icon>-->
-      <!--</button>-->
-      <!--<button pButton pRipple label="button" class="custom-marker p-shadow-2"></button>-->
-      <!--<button pButton pRipple label="button" class="custom-marker p-shadow-2"></button>-->
+      <h1 class="ml-4 mt-1 header-label">{{leftSelectedItem}}</h1>
     </div>
     <div *ngIf="rightNavOpenStatus && rightSelectedItem">
       <p-tabView [(activeIndex)]="activeTabIndex" class="w-100 py-2" >
@@ -67,7 +63,7 @@
       </p-tabView>
     </div>
     <ng-template [ngIf]="leftSelectedItem === 'Case Info'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1"><app-case-info [matter]="user"></app-case-info></div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'File History'">
       <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
@@ -126,7 +122,6 @@
           <input type="text" id="outcome" pInputText [(ngModel)]="selectedCourtDate.outcome" required />
         </div>
       </ng-template>
-
       <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCourtDate()"></button>
