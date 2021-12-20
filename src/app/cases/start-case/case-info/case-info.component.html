@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="matterForm" #matterFormRef class="position:'relative">
+<form (ngSubmit)="onSubmit()" [formGroup]="matterForm" #matterFormRef>
     <div class="p-fluid p-grid mx-4">
         <p-divider class="p-col-12">
             <div class="p-d-inline-flex p-ai-center">
@@ -13,7 +13,7 @@
             </p-dropdown>
         </div>
         <div class="p-field p-col-3">
-            <label for="defendantName">Main Defendant name <span class="requiredLabel">*</span></label>
+            <label for="defendantName">Main Defendant name<span class="requiredLabel">*</span></label>
             <input id="defendantName" formControlName="defendantName" type="text" pInputText>
         </div>
         <p-divider class="p-col-12">

@@ -44,6 +44,7 @@
       </p-tabView>
     </div>
     <ng-template [ngIf]="leftSelectedItem === 'Case Info'">
+     
       <div class="p-4 mt-1"><app-case-info [matter]="user"></app-case-info></div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'File History'">
