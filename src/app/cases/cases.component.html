@@ -1,5 +1,5 @@
 <div class="mx-4 my-4">
-<div class="d-flex justify-content-between my-1">
+<div class="d-flex justify-content-between mt-1 mb-2">
     <h1 class="mt-1">
         Cases
     </h1>
@@ -8,20 +8,23 @@
 <app-add-case [display]="display"(closeDialog)="closeDialog()"></app-add-case>
 
 <div >
-    <p-dataView #dv [value]="legalCases" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
+    <p-dataView #dv [value]="(items | async)!" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
         [sortOrder]="sortOrder" layout="grid">
         <ng-template pTemplate="header">
-            <div class="d-flex flex-row justify-content-between">
-                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
+            <div class="p-d-flex flex-row p-jc-between">
+                <p-dropdown [options]="caseTypes" [(ngModel)]="caseType" placeholder="Case Type"
                     (onChange)="onSortChange($event)" styleClass="mb-2 mb-md-0"></p-dropdown>
+                <p-dropdown [options]="statusOptions" [(ngModel)]="caseStatus" placeholder="Case Status" (onChange)="onSortChange($event)"
+                        styleClass="mb-2 mb-md-0"></p-dropdown>
+                <p-calendar [(ngModel)]="dateRange" dateFormat="dd/mm/yy" selectionMode="range"></p-calendar>
                 <span class="p-input-icon-left mb-2 mb-md-0">
                     <i class="pi pi-search"></i>
-                    <input type="search" pInputText placeholder="Search by Name"  (input)= "onTextChange($event,dv)"  [(ngModel)]="filter">
+                    <input type="search" pInputText placeholder="Search by Client Name"  (input)= "onTextChange($event,dv)"  [(ngModel)]="filter">
                 </span>
                 <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
             </div>
         </ng-template>
-        <ng-template let-case pTemplate="listItem">
+        <!-- <ng-template let-case pTemplate="listItem">
             <div class="col-12">
                 <div class="case-list-item">
                     <div class="case-list-detail">
@@ -39,27 +42,26 @@
                     </div>
                 </div>
             </div>
-        </ng-template>
+        </ng-template> -->
         <ng-template let-product pTemplate="gridItem">
             <div class="col-4 md-4">
                 <div class="case-grid-item card">
                     <div class="case-grid-item-top">
                         <div>
-                            <i class="pi pi-tag case-category-icon"></i>
-                            <span class="case-category">{{product.category}}</span>
+                            <span class="case-category"># 21-0001</span>
                         </div>
                         <span
-                            [class]="'case-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+                            [class]="'case-badge status-' + product.status.toLowerCase()">{{product.status}}</span>
                     </div>
                     <div class="case-grid-item-content">
-                        <div class="case-name">{{product.name}}</div>
-                        <div class="case-description">{{product.description}}</div>
+                        <!-- <div class="case-name">{{product.id}}</div> -->
+                        <div class="case-description">{{product.caseType}}</div>
                     </div>
-                    <div class="case-grid-item-bottom">
+                    <!-- <div class="case-grid-item-bottom">
                         <span class="case-price">${{product.price}}</span>
                         <p-button icon="pi pi-shopping-cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'">
                         </p-button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </ng-template>

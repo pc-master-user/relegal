@@ -34,7 +34,6 @@ export class AddCaseComponent implements OnInit {
   ];
   caseTypes: any[] = [
     {name: "APPEALS", code: '1'},
-   
     {name: 'EVC', code: '2'},
     {name: 'CO-OP', code: '3'},
     { name: 'LIT', code: '4' },
