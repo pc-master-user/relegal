@@ -54,18 +54,10 @@ export class CasesComponent implements OnInit {
 
         this.primengConfig.ripple = true;
   }
-  onSortChange(event: { value: any; }) {
-    console.log(event)
-        let value = event.value;
+  onSortChange() {
+      this.items=  this.store.collection('Matters').valueChanges();
 
-        if (value.indexOf('!') === 0) {
-            this.sortOrder = -1;
-            this.sortField = value.substring(1, value.length);
-        }
-        else {
-            this.sortOrder = 1;
-            this.sortField = value;
-        }
+        
   }
    onTextChange(event: Event, dv: any) {
      dv.filter(this.filter)

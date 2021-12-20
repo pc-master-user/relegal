@@ -32,8 +32,8 @@
                 </ng-template>
 
                 <ng-template pTemplate="right">
-                  <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>
-                  <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                  <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-button-primary mr-2 p-d-inline-block"></p-fileUpload>
+                  <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-secondary"></button>
                 </ng-template>
               </p-toolbar>
 
@@ -75,7 +75,7 @@
                     <td class="text-center"><span [class]="'user-badge status-text ' + user.status.toLowerCase()">&bullet; {{user.status}}</span></td>
                     <td class="text-center">
                       <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-text mr-2" (click)="editUser(user)" style="color: #003050;"></button>
-                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-secondary p-button-text" (click)="deleteUser(user)"></button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deleteUser(user)"></button>
                     </td>
                   </tr>
                 </ng-template>

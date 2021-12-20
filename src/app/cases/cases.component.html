@@ -13,10 +13,10 @@
         <ng-template pTemplate="header">
             <div class="p-d-flex flex-row p-jc-between">
                 <p-dropdown [options]="caseTypes" [(ngModel)]="caseType" placeholder="Case Type"
-                    (onChange)="onSortChange($event)" styleClass="mb-2 mb-md-0"></p-dropdown>
-                <p-dropdown [options]="statusOptions" [(ngModel)]="caseStatus" placeholder="Case Status" (onChange)="onSortChange($event)"
+                    (onChange)="onSortChange()" styleClass="mb-2 mb-md-0"></p-dropdown>
+                <p-dropdown [options]="statusOptions" [(ngModel)]="caseStatus" placeholder="Case Status" (onChange)="onSortChange()"
                         styleClass="mb-2 mb-md-0"></p-dropdown>
-                <p-calendar [(ngModel)]="dateRange" dateFormat="dd/mm/yy" selectionMode="range"></p-calendar>
+                <p-calendar [(ngModel)]="dateRange" (onSelect)="onSortChange()"  placeholder="Date range" dateFormat="dd/mm/yy" selectionMode="range"></p-calendar>
                 <span class="p-input-icon-left mb-2 mb-md-0">
                     <i class="pi pi-search"></i>
                     <input type="search" pInputText placeholder="Search by Client Name"  (input)= "onTextChange($event,dv)"  [(ngModel)]="filter">
