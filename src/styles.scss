@@ -73,6 +73,7 @@ $grid-gutter-width: 24px;
 @import "~bootstrap/scss/utilities/stretched-link";
 @import "~bootstrap/scss/utilities/text";
 @import "~bootstrap/scss/utilities/visibility";
+@import "~bootstrap/scss/utilities/borders";
 
 * {
   box-sizing: border-box;
@@ -128,19 +129,19 @@ body * {
   }
 
   // For devices above 992px, provide slim UI for scrollbars
-  //@include media-breakpoint-up(lg) {
-  //  scrollbar-width: thin;
-  //
-  //  &::-webkit-scrollbar {
-  //    height: 6px;
-  //    width: 6px;
-  //    border-radius: 3px;
-  //  }
-  //
-  //  &::-webkit-scrollbar-thumb {
-  //    border-radius: 3px;
-  //  }
-  //}
+  @include media-breakpoint-up(lg) {
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+    }
+  }
 }
 
 html,

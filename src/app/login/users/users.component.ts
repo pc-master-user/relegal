@@ -57,9 +57,9 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (!this.isUserLoggedIn) {
-    //   this.router.navigate(['/']);
-    // }
+    if (!this.isUserLoggedIn) {
+      this.router.navigate(['/']);
+    }
     this.legalTypes = [{name: 'Attorney', code: 'atr'}, {name: 'Paralegal', code: 'par'}, {name: 'Admin', code: 'admin'}]
     this.statuses = [{name: 'Active', code: 'act'}, {name: 'Inactive', code: 'in'}]
     this.users = [
@@ -134,7 +134,7 @@ export class UsersComponent implements OnInit {
       }
       else {
         this.user.id = this.createId();
-        this.user.img = 'user-placeholder.svg';
+        this.user.img = 'assets/images/profile-placeholder.jpg';
         this.users.push(this.user);
         this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
       }
