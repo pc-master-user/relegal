@@ -6,6 +6,8 @@ import {FormControl} from "@angular/forms";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ActivatedRoute} from "@angular/router";
 import {take} from "rxjs/operators";
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-start-case',
@@ -46,8 +48,7 @@ export class StartCaseComponent implements OnInit {
       this.store.collection('Matters').doc(this.userId).valueChanges().pipe(take(1)).subscribe(res =>{
         this.user = res;
         this.courtDates = this.user['courtDates'];
-        console.log(this.user)
-        console.log(this.courtDates)
+        // this.store.Timestamp(this.courtDates[0]?.courtDate._seconds, this.courtDates[0]?.courtDate._nanoseconds).toDate();
       });
     });
   }
@@ -162,8 +163,16 @@ export class StartCaseComponent implements OnInit {
 
     return index;
   }
-  openNew(): void {
+  openNew(id: string = ''): void {
     this.selectedCourtDate = {};
+    if (id) {
+      this.selectedCourtDate = this.courtDates[this.findIndexById(id, this.courtDates)];
+      console.log(this.selectedCourtDate)
+      // this.selectedCourtDate.createdDate = (typeof this.selectedCourtDate?.createdDate === 'object') ? this.selectedCourtDate?.createdDate?.toDate() : new Date();
+      // this.selectedCourtDate.courtDate = this.selectedCourtDate?.courtDate?.toDate() || new Date();
+      this.selectedCourtDate.createdDate = new Date()
+      this.selectedCourtDate.courtDate = new Date()
+    }
     this.submitted = false;
     this.courtDateDialog = true;
     this.selectedCourtDate.createdDate = new FormControl(this.selectedCourtDate.createdDate ? (this.selectedCourtDate.createdDate) : new Date()).value;
@@ -177,7 +186,6 @@ export class StartCaseComponent implements OnInit {
 
 
   async saveCourtDate() {
-    console.log(this.selectedCourtDate)
     this.submitted = true;
     if (this.selectedCourtDate.id) {
       this.courtDates[this.findIndexById(this.selectedCourtDate?.id, this.courtDates)] = this.selectedCourtDate;
@@ -202,5 +210,8 @@ export class StartCaseComponent implements OnInit {
       id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
+  }
+  toDateString(date: Date) {
+    return moment(date).format('MM/DD/YYYY');
   }
 }

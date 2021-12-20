@@ -20,25 +20,6 @@
                 <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
             </div>
         </ng-template>
-        <!-- <ng-template let-case pTemplate="listItem">
-            <div class="col-12">
-                <div class="case-list-item">
-                    <div class="case-list-detail">
-                        <div class="case-name">{{case.name}}</div>
-                        <div class="case-description">{{case.description}}</div>
-                        <i class="pi pi-tag case-category-icon"></i><span
-                            class="case-category">{{case.category}}</span>
-                    </div>
-                    <div class="case-list-action">
-                        <span class="case-price">${{case.price}}</span>
-                        <p-button icon="pi pi-shopping-cart" label="Add to Cart"
-                            [disabled]="case.inventoryStatus === 'OUTOFSTOCK'"></p-button>
-                        <span
-                            [class]="'case-badge status-' + case.inventoryStatus.toLowerCase()">{{case.inventoryStatus}}</span>
-                    </div>
-                </div>
-            </div>
-        </ng-template> -->
         <ng-template let-product pTemplate="gridItem">
             <p-card class="col-4 md-4 mb-4" [routerLink]="['/cases/start/' + product.id]">
                 <div class="ml-2 mb-1 case-type-label" style="font-weight: 500;">

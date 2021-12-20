@@ -54,9 +54,49 @@
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Court Dates'">
       <div class="p-4 mt-1">
-        <h1>Appearances</h1>
-        <!--{{leftSelectedItem}}   Content-->
-        <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button-primary mr-2" (click)="openNew()"></button>
+        <div class="d-flex justify-content-between align-items-center p-4 my-0">
+          <h1 class="my-0">Appearances</h1>
+          <button pButton pRipple label="New Court Date" icon="pi pi-plus" class="p-button-primary mr-2" (click)="openNew()"></button>
+        </div>
+        <div>
+          <p-dataView #dv [value]="(courtDates)!" [rows]="9" filterBy="createdDate" layout="grid">
+            <ng-template pTemplate="header">
+              <div class="p-d-flex flex-row p-jc-between">
+              </div>
+            </ng-template>
+            <ng-template let-product pTemplate="gridItem">
+              <p-card class="col-4 md-4 mb-4" (click)="openNew(product.id)">
+                <div class="p-d-inline-flex p-col-12">
+                  <div class="mr-2 case-type-label">Type:</div>
+                  <div>{{product.type}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                  <div class="mr-2 case-type-label">created On :</div>
+                  <div>{{toDateString(product.createdDate)}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                  <div class="mr-2 case-type-label">created By :</div>
+                  <div>{{product.createdBy}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                  <div class="mr-2 case-type-label">Date :</div>
+                  <div>{{toDateString(product.courtDate)}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                  <div class="mr-2 case-type-label">Time :</div>
+                  <div>{{product.courtTime}}</div>
+                </div>
+                <div class="p-d-inline-flex p-col-12">
+                  <div class="mr-2 case-type-label">outcome :</div>
+                  <div>{{product.outcome}}</div>
+                </div>
+              </p-card>
+            </ng-template>
+          </p-dataView>
+        </div>
+
+
+
 
       </div>
     </ng-template>
