@@ -1,6 +1,11 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {MatSelectionListChange} from "@angular/material/list";
-import {PrimeIcons} from "primeng/api";
+import {MessageService, PrimeIcons, PrimeNGConfig} from "primeng/api";
+import {CourtDate} from "../case";
+import {FormControl} from "@angular/forms";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {ActivatedRoute} from "@angular/router";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-start-case',
@@ -19,8 +24,33 @@ export class StartCaseComponent implements OnInit {
   rightSelectedItem!: string;
   activeTabIndex!: number;
 
+  courtDateDialog!: boolean;
+  submitted!: boolean;
+  selectedCourtDate!: CourtDate;
+  courtDates: CourtDate[] = [];
+  courtDateTypes = [{name: 'Settlement Conference 1'},{name: 'Submit Order of Reference'},{name: 'Status Conference'},{name: 'Settlement Conference 2'},{name: 'Settlement Conference 3'},{name: 'Order of Reference'},{name: 'Motion for Summary Judgement'},{name: 'JFS'},{name: 'OTSC'},{name: 'Sale'},{name: 'Closing'},{name: 'Traverse Hearing'},{name: 'Deposition'},{name: 'Publication of Service'},{name: "Surrogate's Court"},{name: '90 Day Expiration'},{name: 'Answer Period Expiration'},{name: 'MSJ'},{name: 'Set Sale'},{name: 'HUD 1st Legal'}]
+  userId!: string;
+  user!: any;
+  cases: any;
   CaseId: string = '21-00001';
-  constructor() { }
+  constructor(
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig,
+    private route: ActivatedRoute,
+    private store: AngularFirestore
+    ) {
+    this.primengConfig.ripple = true;
+    route.params.subscribe(params => {
+      this.userId = params['id'];
+
+      this.store.collection('Matters').doc(this.userId).valueChanges().pipe(take(1)).subscribe(res =>{
+        this.user = res;
+        this.courtDates = this.user['courtDates'];
+        console.log(this.user)
+        console.log(this.courtDates)
+      });
+    });
+  }
 
   ngOnInit(): void {
     this.rightEvents1 = [
@@ -98,14 +128,9 @@ export class StartCaseComponent implements OnInit {
       'Post-Sale Deed Recording': ['RJI', 'FSC Released', 'First FSC']
     };
     this.leftSelectedItem = 'Case Info';
+    // this.leftSelectedItem = 'Court Dates';
+    // this.leftSideChange('Court Dates')
     this.leftSideChange('Case Info')
-    // this.items = [
-    //   {label: 'Home', icon: 'pi pi-fw pi-home'},
-    //   {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-    //   {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
-    //   {label: 'Documentation', icon: 'pi pi-fw pi-file'},
-    //   {label: 'Settings', icon: 'pi pi-fw pi-cog'}
-    // ];
   }
 
   leftSideChange(data: any): void {
@@ -119,11 +144,63 @@ export class StartCaseComponent implements OnInit {
     }
   }
   rightSideChange(data: any): void {
-    this.activeTabIndex = 10;
+    this.activeTabIndex = 2;
     this.rightSelectedItem = data;
     setTimeout(() => {
       this.activeTabIndex = 0;
-    }, 10);
+    });
   }
 
+  findIndexById(id: string, data:any[]): number {
+    let index = -1;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+
+    return index;
+  }
+  openNew(): void {
+    this.selectedCourtDate = {};
+    this.submitted = false;
+    this.courtDateDialog = true;
+    this.selectedCourtDate.createdDate = new FormControl(this.selectedCourtDate.createdDate ? (this.selectedCourtDate.createdDate) : new Date()).value;
+    this.selectedCourtDate.courtDate = new FormControl(this.selectedCourtDate.courtDate ? (this.selectedCourtDate.courtDate) : new Date()).value;
+  }
+
+  hideDialog() {
+    this.courtDateDialog = false;
+    this.submitted = false;
+  }
+
+
+  async saveCourtDate() {
+    console.log(this.selectedCourtDate)
+    this.submitted = true;
+    if (this.selectedCourtDate.id) {
+      this.courtDates[this.findIndexById(this.selectedCourtDate?.id, this.courtDates)] = this.selectedCourtDate;
+      this.messageService.add({severity:'success', summary: 'Successful', detail: 'Court Date Updated', life: 3000});
+    }
+    else {
+      this.selectedCourtDate.id = this.createId();
+      this.courtDates.push(this.selectedCourtDate);
+      this.messageService.add({severity:'success', summary: 'Successful', detail: 'A new Court Date Created', life: 3000});
+    }
+    await this.store.collection(`Matters/`).doc(`${this.userId}`).update({courtDates: this.courtDates});
+    this.courtDates = [...this.courtDates];
+    this.courtDateDialog = false;
+    this.selectedCourtDate = {};
+  }
+
+
+  createId(): string {
+    let id = '';
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for ( var i = 0; i < 5; i++ ) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  }
 }

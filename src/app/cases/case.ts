@@ -54,3 +54,12 @@ export interface Matter{
     contestedDate?: Date;
 }
 
+export interface CourtDate {
+  id?: string;
+  type?: string;
+  createdBy?: string;
+  createdDate?: Date;
+  courtDate?: Date;
+  courtTime?: string;
+  outcome?: string;
+}

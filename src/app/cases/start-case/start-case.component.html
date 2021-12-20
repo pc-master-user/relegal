@@ -56,10 +56,10 @@
     <div *ngIf="rightNavOpenStatus && rightSelectedItem">
       <p-tabView [(activeIndex)]="activeTabIndex" class="w-100 py-2" >
         <ng-container *ngFor="let item of tabs[rightSelectedItem]; let i = index;">
-          <p-tabPanel [header]="item" [selected]="(i == 0) ? true : false">
+          <p-tabPanel [header]="item">
             <ng-template pTemplate = "content">
               <div class="px-2">
-                {{rightSelectedItem}} Content 1
+                {{rightSelectedItem}} Content 1 {{activeTabIndex}}
               </div>
             </ng-template>
           </p-tabPanel>
@@ -76,7 +76,12 @@
       <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Court Dates'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1">
+        <h1>Appearances</h1>
+        <!--{{leftSelectedItem}}   Content-->
+        <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button-primary mr-2" (click)="openNew()"></button>
+
+      </div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Parties'">
       <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
@@ -88,11 +93,45 @@
       <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
     </ng-template>
 
-    <!--<p>start-case works!</p>-->
-    <!--&lt;!&ndash;<p-tabMenu [model]="items"></p-tabMenu>&ndash;&gt;-->
+    <p-dialog [(visible)]="courtDateDialog" [style]="{width: '500px'}" header="User Details" [modal]="true" styleClass="p-fluid">
+      <ng-template pTemplate="content">
+        <div class="p-field mb-3">
+          <label for="type" class="d-inline-block mb-2">Type</label>
+          <p-dropdown [options]="courtDateTypes" [(ngModel)]="selectedCourtDate.type" placeholder="Select type" id="type" optionLabel="name" optionValue="name" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" class="w-full mb-3" ></p-dropdown>
+        </div>
+        <div class="p-formgrid p-grid d-flex">
+          <div class="p-field p-col-6 mb-2">
+            <label for="createdDate" class="d-inline-block mb-2">CreatedOn</label>
+            <p-calendar id="createdDate" [(ngModel)]="selectedCourtDate.createdDate" dateFormat="mm/dd/yy" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" styleClass="customDatePicker"></p-calendar>
+          </div>
+          <div class="p-field p-col-6 mb-2">
+            <label for="createdBy" class="d-inline-block mb-2">createdBy</label>
+            <input type="text" id="createdBy" pInputText [(ngModel)]="selectedCourtDate.createdBy" required />
+          </div>
+        </div>
 
-    <!--<p>-->
-      <!--&lt;!&ndash;Option selected: {{stages.selectedOptions.selected[0]?.value}}&ndash;&gt;-->
-    <!--</p>-->
+        <div class="p-formgrid p-grid d-flex">
+          <div class="p-field p-col-6 mb-2">
+            <label for="courtDate" class="d-inline-block mb-2">Date</label>
+            <p-calendar id="courtDate" [(ngModel)]="selectedCourtDate.courtDate" dateFormat="mm/dd/yy" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" styleClass="customDatePicker"></p-calendar>
+          </div>
+          <div class="p-field p-col-6 mb-2">
+            <label for="courtTime" class="d-inline-block mb-2">Time</label>
+            <input type="text" id="courtTime" pInputText [(ngModel)]="selectedCourtDate.courtTime" required />
+          </div>
+        </div>
+
+        <div class="p-field mb-3">
+          <label for="outcome" class="d-inline-block mb-2">Outcome</label>
+          <input type="text" id="outcome" pInputText [(ngModel)]="selectedCourtDate.outcome" required />
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCourtDate()"></button>
+      </ng-template>
+    </p-dialog>
+
   </mat-sidenav-container>
 </div>

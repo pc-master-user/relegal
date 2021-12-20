@@ -1,13 +1,13 @@
 <div class="mx-4 my-4">
-<div class="d-flex justify-content-between mt-1 mb-2">
-    <h1 class="mt-1">
-        Cases
-    </h1>
-    <button mat-raised-button color="accent" (click)="showDialog()"><mat-icon>add</mat-icon> New Case</button>
-</div>
-<app-add-case [display]="display"(closeDialog)="closeDialog()"></app-add-case>
+  <div class="d-flex justify-content-between mt-1 mb-2">
+      <h1 class="mt-1">
+          Cases
+      </h1>
+      <button mat-raised-button color="accent" (click)="showDialog()"><mat-icon>add</mat-icon> New Case</button>
+  </div>
+  <app-add-case [display]="display"(closeDialog)="closeDialog()"></app-add-case>
 
-<div >
+<div>
     <p-dataView #dv [value]="(items | async)!" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
         [sortOrder]="sortOrder" layout="grid">
         <ng-template pTemplate="header">
@@ -40,9 +40,9 @@
             </div>
         </ng-template> -->
         <ng-template let-product pTemplate="gridItem">
-            <p-card class="col-4 md-4 mb-4">
-                <div class="ml-2 mb-1 case-type-label">
-                    #21-0001
+            <p-card class="col-4 md-4 mb-4" [routerLink]="['/cases/start/' + product.id]">
+                <div class="ml-2 mb-1 case-type-label" style="font-weight: 500;">
+                    #{{product.id}}
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                     <div class="mr-2 case-type-label">Case Type:</div>
@@ -74,4 +74,4 @@
         </ng-template>
     </p-dataView>
 </div>
-
+</div>

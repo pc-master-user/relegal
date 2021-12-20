@@ -85,6 +85,7 @@ export class AddCaseComponent implements OnInit {
        zipCode:this.matterForm.get('zip')?.value,
     }
     const matter: Matter = {
+      id: this.store.createId(),
       caseType: this.matterForm.get('caseType')?.value?.name,
       client: client,
       defendantName: this.matterForm.get('defendantName')?.value,

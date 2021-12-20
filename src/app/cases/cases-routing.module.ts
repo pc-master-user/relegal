@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CasesComponent,
   },
   {
-    path: 'start',
+    path: 'start/:id',
     pathMatch: 'full',
     component: StartCaseComponent,
   },

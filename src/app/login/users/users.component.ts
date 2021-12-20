@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {takeUntil} from "rxjs/operators";
 import {AuthService} from "../auth.service";
 import {Subject} from "rxjs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Table} from "primeng/table";
 import {PrimeNGConfig, ConfirmationService, MessageService} from "primeng/api";
 

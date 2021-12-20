@@ -116,7 +116,7 @@
         position: absolute;
         top: 42%;
         left: 0;
-        border-left: 5px solid #8c632e;
+        //border-left: 5px solid #8c632e;
         border-top: 5px solid transparent;
         border-bottom: 5px solid transparent;
       }
@@ -125,36 +125,48 @@
         position: absolute;
         top: 42%;
         right: 0;
-        border-right: 5px solid #8c632e;
+        //border-right: 5px solid #8c632e;
         border-top: 5px solid transparent;
         border-bottom: 5px solid transparent;
       }
     }
   }
 
-}
-
-@media screen and (max-width: 960px) {
-  ::ng-deep {
-    .customized-timeline {
-      .p-timeline-event:nth-child(even) {
-        flex-direction: row !important;
-
-        .p-timeline-event-content {
-          text-align: left !important;
-        }
-      }
-
-      .p-timeline-event-opposite {
-        flex: 0;
-      }
-
-      .p-card {
-        margin-top: 1rem;
-      }
-    }
+  .customDatePicker {
+    max-width: 200px !important;
+    min-width: unset !important;
+    //.p-datepicker {
+    //  max-width: 300px;
+    //  min-width: unset !important;
+    //}
+  }
+  .p-dialog-content {
+    overflow: visible !important;
   }
 }
+
+
+//@media screen and (max-width: 960px) {
+//  ::ng-deep {
+//    .customized-timeline {
+//      .p-timeline-event:nth-child(even) {
+//        flex-direction: row !important;
+//
+//        .p-timeline-event-content {
+//          text-align: left !important;
+//        }
+//      }
+//
+//      .p-timeline-event-opposite {
+//        flex: 0;
+//      }
+//
+//      .p-card {
+//        margin-top: 1rem;
+//      }
+//    }
+//  }
+//}
 
 
 @-webkit-keyframes moveFromLeft {
