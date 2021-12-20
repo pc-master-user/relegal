@@ -44,6 +44,9 @@ import {PanelModule} from 'primeng/panel';
 
 import {RatingModule} from 'primeng/rating';
 import { TooltipModule } from 'primeng/tooltip';
+import {MatListModule} from "@angular/material/list";
+import {TabMenuModule} from "primeng/tabmenu";
+import {TimelineModule} from "primeng/timeline";
 
 
 
@@ -67,6 +70,7 @@ const materialModules = [
   ButtonModule,
   DropdownModule,
   CheckboxModule,
+  ButtonModule,
   RippleModule,
   TableModule,
   MultiSelectModule,
@@ -89,7 +93,10 @@ const materialModules = [
   InputTextareaModule,
   TabViewModule,
   MatNativeDateModule,
-  CardModule
+  TabMenuModule,
+  CardModule,
+  MatListModule,
+  TimelineModule
 ];
 
 @NgModule({

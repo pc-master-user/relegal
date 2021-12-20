@@ -18,7 +18,7 @@ export interface Address {
     city?:string;
     state?:string;
     zipCode?:number;
-    county?:string;
+    county?:County;
     town?:string;
     occupancyStatus?:string;
 }
@@ -51,4 +51,6 @@ export interface Matter{
     isContested?: boolean;
     createdDate?: Date;
     updatedDate?: Date;
+    contestedDate?: Date;
 }
+
