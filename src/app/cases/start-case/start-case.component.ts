@@ -42,8 +42,8 @@ export class StartCaseComponent implements OnInit {
   caseProgressMenu!: any[];
   rightNavOpenStatus!: boolean;
   leftSelectedItem!: string;
-  rightSelectedItem!: string;
-  activeTabIndex!: number;
+  rightSelectedItem: string = 'Referral Received';
+  activeTabIndex: number = 0;
 
   courtDateDialog!: boolean;
   submitted!: boolean;
@@ -199,8 +199,8 @@ export class StartCaseComponent implements OnInit {
     // }
   }
   rightSideChange(data: any): void {
-    // this.activeTabIndex = 0;
-    // this.rightSelectedItem = data;
+    this.activeTabIndex = 0;
+    this.rightSelectedItem = data;
     // setTimeout(() => {
     //   this.activeTabIndex = 0;
     // });
