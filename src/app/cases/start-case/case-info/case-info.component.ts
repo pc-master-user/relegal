@@ -27,54 +27,58 @@ export class CaseInfoComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     console.log('value changed', this.matter);
     if (this.matter?.id) {
-      this.matterForm
-        .get('streetNumber')
-        ?.setValue(this.matter?.property?.streetNumber);
+      // this.matterForm
+      //   .get('streetNumber')
+      //   ?.setValue(this.matter?.property?.streetNumber);
+      this.matterForm = new FormGroup({
+        streetNumber: new FormControl(this.matter?.property?.streetNumber, [
+          Validators.required,
+        ]),
+        streetName: new FormControl(this.matter?.property?.streetName, [
+          Validators.required,
+        ]),
+        city: new FormControl(
+          this.cities.find((city) => city.name === this.matter?.property?.city),
+          [Validators.required]
+        ),
+        state: new FormControl(this.matter?.property?.state, [
+          Validators.required,
+        ]),
+        county: new FormControl(this.matter?.property?.county, [
+          Validators.required,
+        ]),
+        zip: new FormControl(this.matter?.property?.zipCode, [
+          Validators.required,
+        ]),
+        clientCode: new FormControl(
+          this.clientCodes.find(
+            (client) => client.name === this.matter?.client?.code
+          ),
+          [Validators.required]
+        ),
+        clientLoanNumber: new FormControl(this.matter?.client?.loanNumber, [
+          Validators.required,
+        ]),
+        investorCode: new FormControl(
+          this.investorCodes.find(
+            (inv) => inv.name === this.matter?.investor?.code
+          ),
+          [Validators.required]
+        ),
+        investorLoanNumber: new FormControl(this.matter?.investor?.loanNumber, [
+          Validators.required,
+        ]),
+        caseType: new FormControl(
+          this.caseTypes.find(
+            (caseType) => caseType.name === this.matter?.caseType
+          ),
+          [Validators.required]
+        ),
+        defendantName: new FormControl(this.matter?.defendantName, [
+          Validators.required,
+        ]),
+      });
     }
-
-    // this.matterForm = new FormGroup({
-    //   streetNumber: new FormControl(this.matter?.property?.streetNumber, [
-    //     Validators.required,
-    //   ]),
-    //   streetName: new FormControl(this.matter?.property?.streetName, [
-    //     Validators.required,
-    //   ]),
-    //   city: new FormControl(
-    //     this.cities.find((city) => city.name === this.matter?.property?.city),
-    //     [Validators.required]
-    //   ),
-    //   state: new FormControl(this.matter?.property?.state, [
-    //     Validators.required,
-    //   ]),
-    //   county: new FormControl(this.matter?.property?.county, [
-    //     Validators.required,
-    //   ]),
-    //   zip: new FormControl(this.matter?.property?.zipCode, [
-    //     Validators.required,
-    //   ]),
-    //   clientCode: new FormControl(
-    //     this.clientCodes.find(
-    //       (client) => client.name === this.matter?.client?.code
-    //     ),
-    //     [Validators.required]
-    //   ),
-    //   clientLoanNumber: new FormControl(this.matter?.client?.loanNumber, [
-    //     Validators.required,
-    //   ]),
-    //   investorCode: new FormControl(
-    //     this.investorCodes.find(
-    //       (inv) => inv.name === this.matter?.investor?.code
-    //     ),
-    //     [Validators.required]
-    //   ),
-    //   investorLoanNumber: new FormControl(this.matter?.investor?.loanNumber, [
-    //     Validators.required,
-    //   ]),
-    //   caseType: new FormControl(this.matter?.caseType, [Validators.required]),
-    //   defendantName: new FormControl(this.matter?.defendantName, [
-    //     Validators.required,
-    //   ]),
-    // });
   }
   constructor(
     private store: AngularFirestore,
@@ -123,7 +127,6 @@ export class CaseInfoComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.matterForm.value);
     const client: Client = {
       code: this.matterForm.get('clientCode')?.value?.name,
       loanNumber: this.matterForm.get('clientLoanNumber')?.value,
@@ -140,19 +143,21 @@ export class CaseInfoComponent implements OnInit {
       streetNumber: this.matterForm.get('streetNumber')?.value,
       zipCode: this.matterForm.get('zip')?.value,
     };
-    const matter: Matter = {
-      id: this.store.createId(),
+    const updatedMatter: Matter = {
       caseType: this.matterForm.get('caseType')?.value?.name,
       client: client,
       defendantName: this.matterForm.get('defendantName')?.value,
       investor: investor,
-      createdDate: new Date(Date.now()),
       updatedDate: new Date(Date.now()),
       property: address,
       status: 'Active',
       isContested: false,
     };
-    await this.store.collection('Matters').add(matter);
+    // await this.store
+    //   .collection('Matters')
+    //   .doc(this.matter?.id)
+    //   .update(updatedMatter);
+    console.log('message service called');
     this.messageService.add({
       severity: 'success',
       summary: 'Successful',
@@ -211,7 +216,12 @@ export class CaseInfoComponent implements OnInit {
       investorLoanNumber: new FormControl(this.matter?.investor?.loanNumber, [
         Validators.required,
       ]),
-      caseType: new FormControl(this.matter?.caseType, [Validators.required]),
+      caseType: new FormControl(
+        this.caseTypes.find(
+          (caseType) => caseType.name === this.matter?.caseType
+        ),
+        [Validators.required]
+      ),
       defendantName: new FormControl(this.matter?.defendantName, [
         Validators.required,
       ]),

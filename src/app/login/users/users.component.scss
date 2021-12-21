@@ -48,6 +48,7 @@
   .p-button.p-button-secondary {
     background-color: #8c632e;
   }
+
   .p-paginator-prev .p-paginator-icon {
     &::before {
       content: "Prev";
@@ -94,6 +95,7 @@
     position: absolute !important;
     right: 5px;
   }
+
   .p-tabview .p-tabview-panels,
   .p-tabview .p-tabview-nav,
   .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -117,8 +119,8 @@
       display: flex;
       justify-content: space-between;
     }
-    &.p-tabview-ink-bar {
-      left: 180px;
-    }
+    // &.p-tabview-ink-bar {
+    //   left: 180px;
+    // }
   }
 }

@@ -1,58 +1,90 @@
 <div class="mx-4 my-4">
   <div class="d-flex justify-content-between mt-1 mb-2">
-      <h1 class="mt-1">
-          Cases
-      </h1>
-      <button mat-raised-button color="accent" (click)="showDialog()"><mat-icon>add</mat-icon> New Case</button>
+    <h1 class="mt-1">Cases</h1>
+    <button mat-raised-button color="accent" (click)="showDialog()">
+      <mat-icon>add</mat-icon> New Case
+    </button>
   </div>
-  <app-add-case [display]="display"(closeDialog)="closeDialog()"></app-add-case>
+  <app-add-case
+    [display]="display"
+    (closeDialog)="closeDialog()"
+  ></app-add-case>
+  <div>
+    <p-dataView
+      #dv
+      [value]="(items | async)!"
+      [paginator]="true"
+      [rows]="9"
+      filterBy="name"
+      [sortField]="sortField"
+      [sortOrder]="sortOrder"
+      layout="grid"
+    >
+      <ng-template pTemplate="header">
+        <div class="p-d-flex flex-row p-jc-between">
+          <p-dropdown
+            [options]="caseTypes"
+            [(ngModel)]="caseType"
+            placeholder="Case Type"
+            (onChange)="onSortChange()"
+            styleClass="mb-2 mb-md-0"
+          ></p-dropdown>
+          <p-dropdown
+            [options]="statusOptions"
+            [(ngModel)]="caseStatus"
+            placeholder="Case Status"
+            (onChange)="onSortChange()"
+            styleClass="mb-2 mb-md-0"
+          ></p-dropdown>
+          <p-calendar
+            [(ngModel)]="dateRange"
+            (onSelect)="onSortChange()"
+            placeholder="Date range"
+            dateFormat="dd/mm/yy"
+            selectionMode="range"
+          ></p-calendar>
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </ng-template>
+      <ng-template let-product pTemplate="gridItem">
+        <p-card
+          class="col-4 md-4 mb-4"
+          [routerLink]="['/cases/start/' + product.id]"
+        >
+          <div class="ml-2 mb-1 case-type-label" style="font-weight: 500">
+            #{{ product.id }}
+          </div>
+          <div class="p-d-inline-flex p-col-12">
+            <div class="mr-2 case-type-label">Case Type:</div>
+            <div>{{ product.caseType }}</div>
+          </div>
+          <div class="p-d-inline-flex p-col-12">
+            <div class="mr-2 case-type-label">defendent :</div>
+            <div>{{ product.defendantName }}</div>
+          </div>
+          <div class="p-d-inline-flex p-col-12">
+            <div class="mr-2 case-type-label">Attorney :</div>
+            <div>{{ product.attorney }}</div>
+          </div>
+          <div class="p-d-inline-flex p-col-12">
+            <div class="mr-2 case-type-label">Paralegal :</div>
+            <div>{{ product.paralegal }}</div>
+          </div>
+          <div class="p-d-inline-flex p-col-12">
+            <div class="mr-2 case-type-label">createdDate :</div>
+            <div>{{ toDateString(product.createdDate.toDate()) }}</div>
+          </div>
 
-<div>
-    <p-dataView #dv [value]="(items | async)!" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
-        [sortOrder]="sortOrder" layout="grid">
-        <ng-template pTemplate="header">
-            <div class="p-d-flex flex-row p-jc-between">
-                <p-dropdown [options]="caseTypes" [(ngModel)]="caseType" placeholder="Case Type"
-                    (onChange)="onSortChange()" styleClass="mb-2 mb-md-0"></p-dropdown>
-                <p-dropdown [options]="statusOptions" [(ngModel)]="caseStatus" placeholder="Case Status" (onChange)="onSortChange()"
-                        styleClass="mb-2 mb-md-0"></p-dropdown>
-                <p-calendar [(ngModel)]="dateRange" (onSelect)="onSortChange()"  placeholder="Date range" dateFormat="dd/mm/yy" selectionMode="range"></p-calendar>
-                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-            </div>
-        </ng-template>
-        <ng-template let-product pTemplate="gridItem">
-            <p-card class="col-4 md-4 mb-4" [routerLink]="['/cases/start/' + product.id]">
-                <div class="ml-2 mb-1 case-type-label" style="font-weight: 500;">
-                    #{{product.id}}
-                </div>
-                <div class="p-d-inline-flex p-col-12">
-                    <div class="mr-2 case-type-label">Case Type:</div>
-                    <div>{{product.caseType}}</div>
-                </div>
-                <div class="p-d-inline-flex p-col-12">
-                    <div class="mr-2 case-type-label">defendent :</div>
-                    <div>{{product.defendantName}}</div>
-                </div>
-                <div class="p-d-inline-flex p-col-12">
-                    <div class="mr-2 case-type-label">Attorney :</div>
-                    <div>{{product.attorney}}</div>
-                </div>
-                <div class="p-d-inline-flex p-col-12">
-                    <div class="mr-2 case-type-label">Paralegal :</div>
-                    <div>{{product.paralegal}}</div>
-                </div>
-                <div class="p-d-inline-flex p-col-12">
-                    <div class="mr-2 case-type-label">createdDate :</div>
-                    <div>{{toDateString(product.createdDate.toDate())}}</div>
-                </div>
-                
-                <ng-template pTemplate="footer">
-                    <p-chip class="p-col-12 mt-1" [styleClass]="' status-' + product.status.toLowerCase()">
-                        <span>{{product.status}}</span>
-                    </p-chip>
-                </ng-template>
-            </p-card>
-        </ng-template>
+          <ng-template pTemplate="footer">
+            <p-chip
+              class="p-col-12 mt-1"
+              [styleClass]="' status-' + product.status.toLowerCase()"
+            >
+              <span>{{ product.status }}</span>
+            </p-chip>
+          </ng-template>
+        </p-card>
+      </ng-template>
     </p-dataView>
-</div>
+  </div>
 </div>

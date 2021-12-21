@@ -1,92 +1,171 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="matterForm" #matterFormRef>
-    <div class="p-fluid p-grid mx-4">
-        <p-divider class="p-col-12">
-            <div class="p-d-inline-flex p-ai-center">
-                <i class="pi pi-user p-mr-2"></i>
-                <b>Case</b>
-            </div>
-        </p-divider>
-        <div class="p-field p-col-3">
-            <label for="caseType">Case Type <span class="requiredLabel">*</span></label>
-            <p-dropdown id="caseType" formControlName="caseType" [options]="caseTypes" placeholder="Select"
-                optionLabel="name">
-            </p-dropdown>
-        </div>
-        <div class="p-field p-col-3">
-            <label for="defendantName">Main Defendant name<span class="requiredLabel">*</span></label>
-            <input id="defendantName" formControlName="defendantName" type="text" pInputText>
-        </div>
-        <p-divider class="p-col-12">
-            <div class="p-d-inline-flex p-ai-center">
-                <i class="pi pi-user p-mr-2"></i>
-                <b>Property</b>
-            </div>
-        </p-divider>
+  <p-confirmDialog
+    acceptButtonStyleClass="p-button-danger"
+    rejectButtonStyleClass="p-button-primary"
+    [style]="{ width: '450px' }"
+  ></p-confirmDialog>
 
-        <div class="p-field p-col-2">
-            <label for="streetNumber" color="primary">Number <span class="requiredLabel">*</span></label>
-            <input id="streetNumber" formControlName="streetNumber" type="text" pInputText />
-        </div>
-        <div class="p-field p-col-10">
-            <label for="streetName">Street Name <span class="requiredLabel">*</span></label>
-            <input id="streetName" formControlName="streetName" type="text" pInputText />
-        </div>
-        <div class="p-field p-col-3">
-            <label for="city">City <span class="requiredLabel">*</span></label>
-            <p-dropdown id="city" formControlName="city" [options]="cities" placeholder="Select" optionLabel="name">
-            </p-dropdown>
-        </div>
-        <div class="p-field p-col-3">
-            <label for="state">County <span class="requiredLabel">*</span></label>
-            <p-dropdown inputId="county" formControlName="county" [options]="counties" placeholder="Select"
-                optionLabel="name">
-            </p-dropdown>
-        </div>
-        <div class="p-field p-col-3">
-            <label for="state">State <span class="requiredLabel">*</span></label>
-            <input id="state" formControlName="state" type="text" pInputText>
-        </div>
-        <div class="p-field p-col-3">
-            <label for="zip">Zip Code <span class="requiredLabel">*</span></label>
-            <input id="zip" formControlName="zip" type="text" pInputText>
-        </div>
-
-        <p-divider class="p-col-12">
-            <div class="p-d-inline-flex p-ai-center">
-                <i class="pi pi-user p-mr-2"></i>
-                <b>Client</b>
-            </div>
-        </p-divider>
-        <div class="p-field p-col-3">
-            <label for="clientCode">Client Code <span class="requiredLabel">*</span></label>
-            <p-dropdown id="clientCode" formControlName="clientCode" [options]="clientCodes" placeholder="Select"
-                optionLabel="name">
-            </p-dropdown>
-        </div>
-        <div class="p-field p-col-3">
-            <label for="clientLoanNumber">Client Loan # <span class="requiredLabel">*</span></label>
-            <input id="clientLoanNumber" formControlName="clientLoanNumber" type="text" pInputText>
-        </div>
-        <p-divider class="p-col-12">
-            <div class="p-d-inline-flex p-ai-center">
-                <i class="pi pi-user p-mr-2"></i>
-                <b>Investor</b>
-            </div>
-        </p-divider>
-        <div class="p-field p-col-3">
-            <label for="investorCode">Investor Code <span class="requiredLabel">*</span></label>
-            <p-dropdown id="investorCode" formControlName="investorCode" [options]="investorCodes" placeholder="Select"
-                optionLabel="name">
-            </p-dropdown>
-        </div>
-        <div class="p-field p-col-3">
-            <label for="investorLoanNumber">Investor Loan # <span class="requiredLabel">*</span></label>
-            <input id="investorLoanNumber" formControlName="investorLoanNumber" type="text" pInputText>
-        </div>
+  <div class="p-fluid p-grid mx-4">
+    <p-divider class="p-col-12">
+      <div class="p-d-inline-flex p-ai-center">
+        <i class="pi pi-user p-mr-2"></i>
+        <b>Case</b>
+      </div>
+    </p-divider>
+    <div class="p-field p-col-3">
+      <label for="caseType"
+        >Case Type <span class="requiredLabel">*</span></label
+      >
+      <p-dropdown
+        id="caseType"
+        formControlName="caseType"
+        [options]="caseTypes"
+        placeholder="Select"
+        optionLabel="name"
+      >
+      </p-dropdown>
     </div>
-    
+    <div class="p-field p-col-3">
+      <label for="defendantName"
+        >Main Defendant name<span class="requiredLabel">*</span></label
+      >
+      <input
+        id="defendantName"
+        formControlName="defendantName"
+        type="text"
+        pInputText
+      />
+    </div>
+    <p-divider class="p-col-12">
+      <div class="p-d-inline-flex p-ai-center">
+        <i class="pi pi-user p-mr-2"></i>
+        <b>Property</b>
+      </div>
+    </p-divider>
+
+    <div class="p-field p-col-2">
+      <label for="streetNumber" color="primary"
+        >Number <span class="requiredLabel">*</span></label
+      >
+      <input
+        id="streetNumber"
+        formControlName="streetNumber"
+        type="text"
+        pInputText
+      />
+    </div>
+    <div class="p-field p-col-10">
+      <label for="streetName"
+        >Street Name <span class="requiredLabel">*</span></label
+      >
+      <input
+        id="streetName"
+        formControlName="streetName"
+        type="text"
+        pInputText
+      />
+    </div>
+    <div class="p-field p-col-3">
+      <label for="city">City <span class="requiredLabel">*</span></label>
+      <p-dropdown
+        id="city"
+        formControlName="city"
+        [options]="cities"
+        placeholder="Select"
+        optionLabel="name"
+      >
+      </p-dropdown>
+    </div>
+    <div class="p-field p-col-3">
+      <label for="state">County <span class="requiredLabel">*</span></label>
+      <p-dropdown
+        inputId="county"
+        formControlName="county"
+        [options]="counties"
+        placeholder="Select"
+        optionLabel="name"
+      >
+      </p-dropdown>
+    </div>
+    <div class="p-field p-col-3">
+      <label for="state">State <span class="requiredLabel">*</span></label>
+      <input id="state" formControlName="state" type="text" pInputText />
+    </div>
+    <div class="p-field p-col-3">
+      <label for="zip">Zip Code <span class="requiredLabel">*</span></label>
+      <input id="zip" formControlName="zip" type="text" pInputText />
+    </div>
+
+    <p-divider class="p-col-12">
+      <div class="p-d-inline-flex p-ai-center">
+        <i class="pi pi-user p-mr-2"></i>
+        <b>Client</b>
+      </div>
+    </p-divider>
+    <div class="p-field p-col-3">
+      <label for="clientCode"
+        >Client Code <span class="requiredLabel">*</span></label
+      >
+      <p-dropdown
+        id="clientCode"
+        formControlName="clientCode"
+        [options]="clientCodes"
+        placeholder="Select"
+        optionLabel="name"
+      >
+      </p-dropdown>
+    </div>
+    <div class="p-field p-col-3">
+      <label for="clientLoanNumber"
+        >Client Loan # <span class="requiredLabel">*</span></label
+      >
+      <input
+        id="clientLoanNumber"
+        formControlName="clientLoanNumber"
+        type="text"
+        pInputText
+      />
+    </div>
+    <p-divider class="p-col-12">
+      <div class="p-d-inline-flex p-ai-center">
+        <i class="pi pi-user p-mr-2"></i>
+        <b>Investor</b>
+      </div>
+    </p-divider>
+    <div class="p-field p-col-3">
+      <label for="investorCode"
+        >Investor Code <span class="requiredLabel">*</span></label
+      >
+      <p-dropdown
+        id="investorCode"
+        formControlName="investorCode"
+        [options]="investorCodes"
+        placeholder="Select"
+        optionLabel="name"
+      >
+      </p-dropdown>
+    </div>
+    <div class="p-field p-col-3">
+      <label for="investorLoanNumber"
+        >Investor Loan # <span class="requiredLabel">*</span></label
+      >
+      <input
+        id="investorLoanNumber"
+        formControlName="investorLoanNumber"
+        type="text"
+        pInputText
+      />
+    </div>
+  </div>
 </form>
-<div class="p-flex-row-reverse  p-grid">
-    <button class="p-col-2 mr-4" [disabled]="matterForm.invalid" mat-raised-button color="primary"
-        (click)="onSubmit()">Save</button>
+<div class="p-flex-row-reverse p-grid">
+  <button
+    class="p-col-2 mr-4"
+    [disabled]="matterForm.invalid"
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+  >
+    Save
+  </button>
 </div>

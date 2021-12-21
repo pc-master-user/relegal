@@ -3,152 +3,258 @@
     <mat-sidenav #letNav opened mode="side" class="rounded-lg border-0">
       <mat-selection-list #stages [multiple]="false" class="mt-7">
         <div *ngFor="let item of leftSideItems">
-          <mat-list-option  [value]="item" selected="{{item === 'Case Info' ? true : false}}" (click)="leftSideChange(item)" class="border-bottom">
-            {{item}}
+          <mat-list-option
+            [value]="item"
+            selected="{{ item === 'Case Information' ? true : false }}"
+            (click)="leftSideChange(item)"
+            class="border-bottom"
+          >
+            {{ item }}
           </mat-list-option>
-
         </div>
-
       </mat-selection-list>
     </mat-sidenav>
-    <mat-sidenav #rightNav opened="{{rightNavOpenStatus}}" mode="side" position="end" class="rounded-lg border-0" style="background: white; margin-top: 36px;">
-      <p-timeline [value]="rightEvents1" align="left" styleClass="customized-timeline">
-        <ng-template pTemplate="marker" let-event>
-          <button pButton pRipple label="{{event.icon}}" [disabled]="!event.date" class="custom-marker p-shadow-2" [style.backgroundColor]="event.color" (click)="rightSideChange(event.status)"></button>
-        </ng-template>
-        <ng-template pTemplate="content" let-event>
-          <div class="custom-class">
-            <span class="d-inline-block mb-2" [style.color]="event.color">{{event.status}}</span>
-            <span class="font-weight-normal d-block mb-2" style="font-size: 0.875rem; color: rgba(0, 0, 0, 0.6);">{{event.date}}</span>
-          </div>
-        </ng-template>
-      </p-timeline>
-    </mat-sidenav>
-    <div class="d-flex px-2 mt-2 sticky-div">
+    <div class="d-flex px-2 sticky-div p-ai-center">
       <button mat-icon-button class="menubutton" (click)="letNav.toggle()">
-        <mat-icon >menu</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
-      <h1 class="ml-4 mt-1 header-label">{{leftSelectedItem}}</h1>
+      <h1 class="ml-4 mt-4 header-label">{{ leftSelectedItem }}</h1>
     </div>
-    <div *ngIf="rightNavOpenStatus && rightSelectedItem">
-      <p-tabView [(activeIndex)]="activeTabIndex" class="w-100 py-2" >
-        <ng-container *ngFor="let item of tabs[rightSelectedItem]; let i = index;">
-          <p-tabPanel [header]="item">
-            <ng-template pTemplate = "content">
-              <div class="px-2">
-                {{rightSelectedItem}} Content 1 {{activeTabIndex}}
-              </div>
-            </ng-template>
-          </p-tabPanel>
-        </ng-container>
-      </p-tabView>
-    </div>
-    <ng-template [ngIf]="leftSelectedItem === 'Case Info'">
-     
-      <div class="p-4 mt-1"><app-case-info [matter]="user"></app-case-info></div>
+
+    <mat-drawer-container
+      *ngIf="leftSelectedItem === 'Case Progress'"
+      class="demo-app"
+    >
+      <mat-drawer
+        #rightNav
+        class="p-d-flex"
+        position="end"
+        mode="side"
+        opened
+        class="rounded-lg border-0"
+        style="background: white"
+      >
+        <p-timeline [value]="caseProgressMenu" styleClass="customized-timeline">
+          <ng-template pTemplate="marker" let-event>
+            <button
+              pButton
+              pRipple
+              label="{{ event.icon }}"
+              [disabled]="!event.date"
+              class="custom-marker p-shadow-2"
+              [style.backgroundColor]="event.color"
+              (click)="rightSideChange(event.status)"
+            ></button>
+          </ng-template>
+          <ng-template pTemplate="content" let-event>
+            <div class="custom-class">
+              <span class="d-inline-block mb-2" [style.color]="event.color">{{
+                event.status
+              }}</span>
+              <span
+                class="font-weight-normal d-block mb-2"
+                style="font-size: 0.875rem; color: rgba(0, 0, 0, 0.6)"
+                >{{ event.date }}</span
+              >
+            </div>
+          </ng-template>
+        </p-timeline>
+      </mat-drawer>
+      <mat-drawer-content>
+        <p-tabView [(activeIndex)]="activeTabIndex" class="py-2">
+          <ng-container
+            *ngFor="let item of tabs[rightSelectedItem]; let i = index"
+          >
+            <p-tabPanel [header]="item">
+              <ng-template pTemplate="content">
+                <div class="px-2">
+                  {{ rightSelectedItem }} Content 1 {{ activeTabIndex }}
+                </div>
+              </ng-template>
+            </p-tabPanel>
+          </ng-container>
+        </p-tabView>
+      </mat-drawer-content>
+    </mat-drawer-container>
+
+    <ng-template [ngIf]="leftSelectedItem === 'Case Information'">
+      <div class="p-4 mt-1">
+        <app-case-info [matter]="user"></app-case-info>
+      </div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'File History'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1">{{ leftSelectedItem }} Content</div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Comments'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1">{{ leftSelectedItem }} Content</div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Court Dates'">
       <div class="p-4 mt-1">
         <div class="d-flex justify-content-between align-items-center p-4 my-0">
           <h1 class="my-0">Appearances</h1>
-          <button pButton pRipple label="New Court Date" icon="pi pi-plus" class="p-button-primary mr-2" (click)="openNew()"></button>
+          <button
+            pButton
+            pRipple
+            label="New Court Date"
+            icon="pi pi-plus"
+            class="p-button-primary mr-2"
+            (click)="openNew()"
+          ></button>
         </div>
         <div>
-          <p-dataView #dv [value]="(courtDates)!" [rows]="9" filterBy="createdDate" layout="grid">
+          <p-dataView
+            #dv
+            [value]="courtDates!"
+            [rows]="9"
+            filterBy="createdDate"
+            layout="grid"
+          >
             <ng-template pTemplate="header">
-              <div class="p-d-flex flex-row p-jc-between">
-              </div>
+              <div class="p-d-flex flex-row p-jc-between"></div>
             </ng-template>
             <ng-template let-product pTemplate="gridItem">
               <p-card class="col-4 md-4 mb-4" (click)="openNew(product.id)">
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">Type:</div>
-                  <div>{{product.type}}</div>
+                  <div>{{ product.type }}</div>
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">created On :</div>
-                  <div>{{toDateString(product.createdDate)}}</div>
+                  <div>{{ toDateString(product.createdDate) }}</div>
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">created By :</div>
-                  <div>{{product.createdBy}}</div>
+                  <div>{{ product.createdBy }}</div>
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">Date :</div>
-                  <div>{{toDateString(product.courtDate)}}</div>
+                  <div>{{ toDateString(product.courtDate) }}</div>
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">Time :</div>
-                  <div>{{product.courtTime}}</div>
+                  <div>{{ product.courtTime }}</div>
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">outcome :</div>
-                  <div>{{product.outcome}}</div>
+                  <div>{{ product.outcome }}</div>
                 </div>
               </p-card>
             </ng-template>
           </p-dataView>
         </div>
-
-
-
-
       </div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Parties'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1">{{ leftSelectedItem }} Content</div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Loan/Property Info'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1">{{ leftSelectedItem }} Content</div>
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Ledger Details'">
-      <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
+      <div class="p-4 mt-1">{{ leftSelectedItem }} Content</div>
     </ng-template>
 
-    <p-dialog [(visible)]="courtDateDialog" [style]="{width: '500px'}" header="User Details" [modal]="true" styleClass="p-fluid case-dialog">
+    <p-dialog
+      [(visible)]="courtDateDialog"
+      [style]="{ width: '500px' }"
+      header="User Details"
+      [modal]="true"
+      styleClass="p-fluid case-dialog"
+    >
       <ng-template pTemplate="content">
         <div class="p-field mb-3">
           <label for="type" class="d-inline-block mb-2">Type</label>
-          <p-dropdown [options]="courtDateTypes" [(ngModel)]="selectedCourtDate.type" placeholder="Select type" id="type" optionLabel="name" optionValue="name" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" class="w-full mb-3" ></p-dropdown>
+          <p-dropdown
+            [options]="courtDateTypes"
+            [(ngModel)]="selectedCourtDate.type"
+            placeholder="Select type"
+            id="type"
+            optionLabel="name"
+            optionValue="name"
+            [showTransitionOptions]="'0ms'"
+            [hideTransitionOptions]="'0ms'"
+            class="w-full mb-3"
+          ></p-dropdown>
         </div>
         <div class="p-formgrid p-grid d-flex">
           <div class="p-field p-col-6 mb-2">
-            <label for="createdDate" class="d-inline-block mb-2">CreatedOn</label>
-            <p-calendar id="createdDate" [(ngModel)]="selectedCourtDate.createdDate" dateFormat="mm/dd/yy" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" styleClass="customDatePicker"></p-calendar>
+            <label for="createdDate" class="d-inline-block mb-2"
+              >CreatedOn</label
+            >
+            <p-calendar
+              id="createdDate"
+              [(ngModel)]="selectedCourtDate.createdDate"
+              dateFormat="mm/dd/yy"
+              [showTransitionOptions]="'0ms'"
+              [hideTransitionOptions]="'0ms'"
+              styleClass="customDatePicker"
+            ></p-calendar>
           </div>
           <div class="p-field p-col-6 mb-2">
             <label for="createdBy" class="d-inline-block mb-2">createdBy</label>
-            <input type="text" id="createdBy" pInputText [(ngModel)]="selectedCourtDate.createdBy" required />
+            <input
+              type="text"
+              id="createdBy"
+              pInputText
+              [(ngModel)]="selectedCourtDate.createdBy"
+              required
+            />
           </div>
         </div>
 
         <div class="p-formgrid p-grid d-flex">
           <div class="p-field p-col-6 mb-2">
             <label for="courtDate" class="d-inline-block mb-2">Date</label>
-            <p-calendar id="courtDate" [(ngModel)]="selectedCourtDate.courtDate" dateFormat="mm/dd/yy" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" styleClass="customDatePicker"></p-calendar>
+            <p-calendar
+              id="courtDate"
+              [(ngModel)]="selectedCourtDate.courtDate"
+              dateFormat="mm/dd/yy"
+              [showTransitionOptions]="'0ms'"
+              [hideTransitionOptions]="'0ms'"
+              styleClass="customDatePicker"
+            ></p-calendar>
           </div>
           <div class="p-field p-col-6 mb-2">
             <label for="courtTime" class="d-inline-block mb-2">Time</label>
-            <input type="text" id="courtTime" pInputText [(ngModel)]="selectedCourtDate.courtTime" required />
+            <input
+              type="text"
+              id="courtTime"
+              pInputText
+              [(ngModel)]="selectedCourtDate.courtTime"
+              required
+            />
           </div>
         </div>
 
         <div class="p-field mb-3">
           <label for="outcome" class="d-inline-block mb-2">Outcome</label>
-          <input type="text" id="outcome" pInputText [(ngModel)]="selectedCourtDate.outcome" required />
+          <input
+            type="text"
+            id="outcome"
+            pInputText
+            [(ngModel)]="selectedCourtDate.outcome"
+            required
+          />
         </div>
       </ng-template>
       <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCourtDate()"></button>
+        <button
+          pButton
+          pRipple
+          label="Cancel"
+          icon="pi pi-times"
+          class="p-button-text"
+          (click)="hideDialog()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="Save"
+          icon="pi pi-check"
+          class="p-button-text"
+          (click)="saveCourtDate()"
+        ></button>
       </ng-template>
     </p-dialog>
-
   </mat-sidenav-container>
 </div>

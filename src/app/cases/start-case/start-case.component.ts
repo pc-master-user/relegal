@@ -17,7 +17,7 @@ export class StartCaseComponent implements OnInit {
   toggle = true;
   stages!: ElementRef<MatSelectionListChange>;
   leftSideItems: string[] = [
-    'Case Info',
+    'Case Information',
     'Case Progress',
     'File History',
     'Comments',
@@ -39,7 +39,7 @@ export class StartCaseComponent implements OnInit {
     'Post-Sale Deed',
   ];
   tabs: any = {};
-  rightEvents1!: any[];
+  caseProgressMenu!: any[];
   rightNavOpenStatus!: boolean;
   leftSelectedItem!: string;
   rightSelectedItem!: string;
@@ -84,50 +84,51 @@ export class StartCaseComponent implements OnInit {
     this.primengConfig.ripple = true;
     route.params.subscribe((params) => {
       this.userId = params['id'];
-      this.store
-        .collection('Matters')
-        .doc(this.userId)
-        .valueChanges()
-        .pipe(take(1))
-        .subscribe((res) => {
-          this.user = res;
-          this.courtDates = this.user?.courtDates || [];
-          // this.store.Timestamp(this.courtDates[0]?.courtDate._seconds, this.courtDates[0]?.courtDate._nanoseconds).toDate();
-        });
     });
+    this.store
+      .collection('Matters')
+      .doc(this.userId)
+      .valueChanges()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.user = res;
+        console.log('this.user', this.user);
+        this.courtDates = this.user?.courtDates || [];
+        // this.store.Timestamp(this.courtDates[0]?.courtDate._seconds, this.courtDates[0]?.courtDate._nanoseconds).toDate();
+      });
   }
-
+  // 8c632e
   ngOnInit(): void {
-    this.rightEvents1 = [
+    this.caseProgressMenu = [
       {
         status: 'Referral Received',
         date: '15/10/2020 10:30',
         icon: 1,
-        color: '#689F38',
+        color: '#003050',
       },
       {
         status: 'Title Report Reviewed',
         date: '15/10/2020 14:00',
         icon: 2,
-        color: '#689F38',
+        color: '#003050',
       },
       {
         status: 'First Legal Filing',
         date: '15/10/2020 16:15',
         icon: 3,
-        color: '#689F38',
+        color: '#003050',
       },
       {
         status: 'Service Complete',
         date: '16/10/2020 10:00',
         icon: 4,
-        color: '#689F38',
+        color: '#003050',
       },
       {
         status: 'Settlement Released',
         date: '15/10/2020 10:30',
         icon: 5,
-        color: '#689F38',
+        color: '#003050',
       },
       {
         status: 'OR/MSJ Entered',
@@ -185,30 +186,24 @@ export class StartCaseComponent implements OnInit {
       'ROC Received': ['RJI', 'FSC Released', 'First FSC'],
       'Judgement Entered': ['RJI', 'FSC Released', 'First FSC'],
       'Sale Held': ['RJI', 'FSC Released', 'First FSC'],
-      'Post-Sale Deed': ['RJI', 'FSC Released', 'First FSC']
+      'Post-Sale Deed': ['RJI', 'FSC Released', 'First FSC'],
     };
-    this.leftSelectedItem = 'Case Info';
-    // this.leftSelectedItem = 'Court Dates';
-    // this.leftSideChange('Court Dates')
-    this.leftSideChange('Case Info');
+    this.leftSelectedItem = 'Case Information';
   }
 
   leftSideChange(data: any): void {
     this.leftSelectedItem = data;
-    if (data === 'Case Progress') {
-      this.rightNavOpenStatus = true;
-      this.rightSelectedItem = this.rightSideItems[0];
-      this.rightSideChange(this.rightSelectedItem);
-    } else {
-      this.rightNavOpenStatus = false;
-    }
+    // if (data === 'Case Progress') {
+    //   this.rightSelectedItem = this.rightSideItems[0];
+    //   this.rightSideChange(this.rightSelectedItem);
+    // }
   }
   rightSideChange(data: any): void {
-    this.activeTabIndex = 2;
-    this.rightSelectedItem = data;
-    setTimeout(() => {
-      this.activeTabIndex = 0;
-    });
+    // this.activeTabIndex = 0;
+    // this.rightSelectedItem = data;
+    // setTimeout(() => {
+    //   this.activeTabIndex = 0;
+    // });
   }
 
   findIndexById(id: string, data: any[]): number {
@@ -283,7 +278,6 @@ export class StartCaseComponent implements OnInit {
         .doc(`${this.userId}`)
         .update({ courtDates: this.courtDates });
     }
-
   }
 
   createId(): string {
