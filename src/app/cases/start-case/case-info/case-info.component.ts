@@ -13,6 +13,7 @@ import {
   PrimeNGConfig,
   ConfirmationService,
   MessageService,
+  Message,
 } from 'primeng/api';
 
 @Component({
@@ -23,7 +24,7 @@ import {
 export class CaseInfoComponent implements OnInit {
   @Input() matter!: Matter;
   matterForm!: FormGroup;
-
+  msgs: any[] = [];
   ngOnChanges(changes: SimpleChanges): void {
     console.log('value changed', this.matter);
     if (this.matter?.id) {
@@ -158,12 +159,21 @@ export class CaseInfoComponent implements OnInit {
     //   .doc(this.matter?.id)
     //   .update(updatedMatter);
     console.log('message service called');
-    this.messageService.add({
+    // this.msgs.push({
+    //   severity: 'success',
+    //   summary: 'Successful',
+    //   detail: 'Matter Created',
+    //   life: 3000,
+    // });
+    const mesg = this.messageService.add({
       severity: 'success',
       summary: 'Successful',
-      detail: 'Matter Created',
+      detail: 'Matter updated',
       life: 3000,
     });
+    setTimeout(() => {
+      this.messageService.clear();
+    }, 2000);
   }
   cancel() {
     console.log('Cancel Called');

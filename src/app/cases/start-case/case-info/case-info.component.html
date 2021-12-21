@@ -4,7 +4,6 @@
     rejectButtonStyleClass="p-button-primary"
     [style]="{ width: '450px' }"
   ></p-confirmDialog>
-
   <div class="p-fluid p-grid mx-4">
     <p-divider class="p-col-12">
       <div class="p-d-inline-flex p-ai-center">
@@ -126,6 +125,8 @@
         pInputText
       />
     </div>
+
+    <p-messages class="p-col-6" [(value)]="msgs"></p-messages>
     <p-divider class="p-col-12">
       <div class="p-d-inline-flex p-ai-center">
         <i class="pi pi-user p-mr-2"></i>
@@ -158,6 +159,7 @@
     </div>
   </div>
 </form>
+
 <div class="p-flex-row-reverse p-grid">
   <button
     class="p-col-2 mr-4"

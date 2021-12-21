@@ -271,8 +271,10 @@ export class StartCaseComponent implements OnInit {
     }
     this.courtDates = [...this.courtDates];
     this.courtDateDialog = false;
+    console.log(' this.selectedCourtDate', this.selectedCourtDate);
     this.selectedCourtDate = {};
     if (this.userId) {
+      console.log();
       await this.store
         .collection(`Matters/`)
         .doc(`${this.userId}`)

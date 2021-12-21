@@ -221,13 +221,11 @@
           </div>
           <div class="p-field p-col-6 mb-2">
             <label for="courtTime" class="d-inline-block mb-2">Time</label>
-            <input
-              type="text"
-              id="courtTime"
-              pInputText
+            <p-calendar
               [(ngModel)]="selectedCourtDate.courtTime"
-              required
-            />
+              [timeOnly]="true"
+              hourFormat="12"
+            ></p-calendar>
           </div>
         </div>
 
