@@ -60,8 +60,13 @@
           </ng-template>
         </p-timeline>
       </mat-drawer>
-      <mat-drawer-content>
-        <p-tabView [(activeIndex)]="activeTabIndex" class="py-2">
+      <mat-drawer-content class="demo-app-main">
+        <p-tabView
+          class="p-d-flex"
+          id="rightSelectedItem"
+          [(activeIndex)]="activeTabIndex"
+          class="py-2"
+        >
           <ng-container
             *ngFor="let item of tabs[rightSelectedItem]; let i = index"
           >
