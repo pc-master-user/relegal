@@ -101,11 +101,11 @@
       .mat-list-text {
         color: #8c632e;
         opacity: 1;
-        -webkit-animation: moveFromLeft 300ms ease-in-out;
-        -moz-animation: moveFromLeft 300ms ease-in-out;
-        -ms-animation: moveFromLeft 300ms ease-in-out;
-        -o-animation: moveFromLeft 300ms ease-in-out;
-        animation: moveFromLeft 300ms ease-in-out;
+        -webkit-animation: moveFromLeft 800ms ease-in-out;
+        -moz-animation: moveFromLeft 800ms ease-in-out;
+        -ms-animation: moveFromLeft 800ms ease-in-out;
+        -o-animation: moveFromLeft 800ms ease-in-out;
+        animation: moveFromLeft 800ms ease-in-out;
       }
     }
     &.mat-list-single-selected-option {
@@ -144,37 +144,11 @@
   .customDatePicker {
     max-width: 200px !important;
     min-width: unset !important;
-    //.p-datepicker {
-    //  max-width: 300px;
-    //  min-width: unset !important;
-    //}
   }
-  .p-dialog-content {
+  .case-dialog .p-dialog-content {
     overflow: visible !important;
   }
 }
-
-//@media screen and (max-width: 960px) {
-//  ::ng-deep {
-//    .customized-timeline {
-//      .p-timeline-event:nth-child(even) {
-//        flex-direction: row !important;
-//
-//        .p-timeline-event-content {
-//          text-align: left !important;
-//        }
-//      }
-//
-//      .p-timeline-event-opposite {
-//        flex: 0;
-//      }
-//
-//      .p-card {
-//        margin-top: 1rem;
-//      }
-//    }
-//  }
-//}
 
 @-webkit-keyframes moveFromLeft {
   from {
@@ -193,32 +167,6 @@
     -o-transform: translateX(0%);
     transform: translateX(0%);
   }
-}
-@-webkit-keyframes moveFromRight {
-  from {
-    opacity: 0;
-    -webkit-transform: translateX(-200%);
-    -moz-transform: translateX(-200%);
-    -ms-transform: translateX(-200%);
-    -o-transform: translateX(-200%);
-    transform: translateX(-200%);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translateX(0%);
-    -moz-transform: translateX(0%);
-    -ms-transform: translateX(0%);
-    -o-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-}
-.mcd-menu li:hover a strong {
-  opacity: 1;
-  -webkit-animation: moveFromLeft 300ms ease-in-out;
-  -moz-animation: moveFromLeft 300ms ease-in-out;
-  -ms-animation: moveFromLeft 300ms ease-in-out;
-  -o-animation: moveFromLeft 300ms ease-in-out;
-  animation: moveFromLeft 300ms ease-in-out;
 }
 .mcd-menu li:hover > a {
   color: #e67e22;

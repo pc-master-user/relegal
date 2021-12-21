@@ -17,7 +17,7 @@
           <button pButton pRipple label="{{event.icon}}" [disabled]="!event.date" class="custom-marker p-shadow-2" [style.backgroundColor]="event.color" (click)="rightSideChange(event.status)"></button>
         </ng-template>
         <ng-template pTemplate="content" let-event>
-          <div class="custom-class" *ngIf="toggle">
+          <div class="custom-class">
             <span class="d-inline-block mb-2" [style.color]="event.color">{{event.status}}</span>
             <span class="font-weight-normal d-block mb-2" style="font-size: 0.875rem; color: rgba(0, 0, 0, 0.6);">{{event.date}}</span>
           </div>
@@ -111,7 +111,7 @@
       <div class="p-4 mt-1">{{leftSelectedItem}}   Content</div>
     </ng-template>
 
-    <p-dialog [(visible)]="courtDateDialog" [style]="{width: '500px'}" header="User Details" [modal]="true" styleClass="p-fluid">
+    <p-dialog [(visible)]="courtDateDialog" [style]="{width: '500px'}" header="User Details" [modal]="true" styleClass="p-fluid case-dialog">
       <ng-template pTemplate="content">
         <div class="p-field mb-3">
           <label for="type" class="d-inline-block mb-2">Type</label>

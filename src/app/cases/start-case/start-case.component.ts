@@ -91,7 +91,7 @@ export class StartCaseComponent implements OnInit {
         .pipe(take(1))
         .subscribe((res) => {
           this.user = res;
-          this.courtDates = this.user?.courtDates;
+          this.courtDates = this.user?.courtDates || [];
           // this.store.Timestamp(this.courtDates[0]?.courtDate._seconds, this.courtDates[0]?.courtDate._nanoseconds).toDate();
         });
     });
@@ -180,12 +180,12 @@ export class StartCaseComponent implements OnInit {
         'Publication of Service',
         'Death Certificate Requested',
       ],
-      'Settlement Conf.Released': ['RJI', 'FSC Released', 'First FSC'],
+      'Settlement Released': ['RJI', 'FSC Released', 'First FSC'],
       'OR/MSJ Entered': ['Oor Prepared', 'FSC Released', 'First FSC'],
       'ROC Received': ['RJI', 'FSC Released', 'First FSC'],
       'Judgement Entered': ['RJI', 'FSC Released', 'First FSC'],
       'Sale Held': ['RJI', 'FSC Released', 'First FSC'],
-      'Post-Sale Deed Recording': ['RJI', 'FSC Released', 'First FSC'],
+      'Post-Sale Deed': ['RJI', 'FSC Released', 'First FSC']
     };
     this.leftSelectedItem = 'Case Info';
     // this.leftSelectedItem = 'Court Dates';
@@ -266,7 +266,7 @@ export class StartCaseComponent implements OnInit {
       });
     } else {
       this.selectedCourtDate.id = this.createId();
-      this.courtDates.push(this.selectedCourtDate);
+      this.courtDates && this.courtDates.push(this.selectedCourtDate);
       this.messageService.add({
         severity: 'success',
         summary: 'Successful',
@@ -274,13 +274,16 @@ export class StartCaseComponent implements OnInit {
         life: 3000,
       });
     }
-    await this.store
-      .collection(`Matters/`)
-      .doc(`${this.userId}`)
-      .update({ courtDates: this.courtDates });
     this.courtDates = [...this.courtDates];
     this.courtDateDialog = false;
     this.selectedCourtDate = {};
+    if (this.userId) {
+      await this.store
+        .collection(`Matters/`)
+        .doc(`${this.userId}`)
+        .update({ courtDates: this.courtDates });
+    }
+
   }
 
   createId(): string {

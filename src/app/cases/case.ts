@@ -63,3 +63,12 @@ export interface CourtDate {
   courtTime?: string;
   outcome?: string;
 }
+
+export interface Hold {
+  id?: string;
+  type?: string;
+  category?: string;
+  start?: Date;
+  end?: Date;
+  resumeReason?: Date;
+}
