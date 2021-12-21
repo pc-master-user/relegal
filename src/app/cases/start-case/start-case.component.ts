@@ -71,6 +71,15 @@ export class StartCaseComponent implements OnInit {
     { name: 'Set Sale' },
     { name: 'HUD 1st Legal' },
   ];
+
+  // For Case progress
+  //referralReceived
+  referralReviewal: any = {
+    'started': ''
+  };
+  isPostComplaintTransfer!: boolean;
+
+
   userId!: string;
   user!: any;
   cases: any;
@@ -94,6 +103,22 @@ export class StartCaseComponent implements OnInit {
         this.user = res;
         console.log('this.user', this.user);
         this.courtDates = this.user?.courtDates || [];
+        if (this.user?.courtDates) {
+          for (let i= 0; i < this.user.courtDates.length; i++){
+            let a = this.user.courtDates[0];
+            if (a.createdDate) {
+              this.user.courtDates[0].createdDate = a.createdDate.toDate();
+            }
+            if (a.courtDate) {
+              this.user.courtDates[0].courtDate = a.courtDate.toDate();
+            }
+            if (a.courtTime) {
+              this.user.courtDates[0].courtTime = a.courtTime.toDate();
+            }
+          }
+        }
+console.log(this.user?.courtDates)
+        // var a = this.courtDates[0]
         // this.store.Timestamp(this.courtDates[0]?.courtDate._seconds, this.courtDates[0]?.courtDate._nanoseconds).toDate();
       });
   }
@@ -222,11 +247,11 @@ export class StartCaseComponent implements OnInit {
     if (id) {
       this.selectedCourtDate =
         this.courtDates[this.findIndexById(id, this.courtDates)];
-      console.log(this.selectedCourtDate);
-      // this.selectedCourtDate.createdDate = (typeof this.selectedCourtDate?.createdDate === 'object') ? this.selectedCourtDate?.createdDate?.toDate() : new Date();
-      // this.selectedCourtDate.courtDate = this.selectedCourtDate?.courtDate?.toDate() || new Date();
-      this.selectedCourtDate.createdDate = new Date();
-      this.selectedCourtDate.courtDate = new Date();
+        this.selectedCourtDate.createdDate = this.selectedCourtDate?.createdDate ? this.selectedCourtDate?.createdDate : new Date();
+        this.selectedCourtDate.courtDate = this.selectedCourtDate?.courtDate ? this.selectedCourtDate?.courtDate : new Date();
+        this.selectedCourtDate.courtTime = this.selectedCourtDate?.courtTime ? this.selectedCourtDate?.courtTime : new Date();
+      // this.selectedCourtDate.createdDate = new Date();
+      // this.selectedCourtDate.courtDate = new Date();
     }
     this.submitted = false;
     this.courtDateDialog = true;
@@ -293,5 +318,8 @@ export class StartCaseComponent implements OnInit {
   }
   toDateString(date: Date) {
     return moment(date).format('MM/DD/YYYY');
+  }
+  toTimeString(date: Date) {
+    return moment(date).format('HH/mm');
   }
 }

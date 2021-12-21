@@ -14,17 +14,25 @@
         </div>
       </mat-selection-list>
     </mat-sidenav>
-    <div class="d-flex px-2 sticky-div p-ai-center">
-      <button mat-icon-button class="menubutton" (click)="letNav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <h1 class="ml-4 mt-4 header-label">{{ leftSelectedItem }}</h1>
+    <div class="d-flex justify-content-between align-items-center px-2 sticky-div p-ai-center">
+      <div class="p-d-flex p-align-center">
+        <button mat-icon-button class="menubutton" (click)="letNav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="ml-4 mt-4 header-label">{{ leftSelectedItem }}</h1>
+      </div>
+      <button *ngIf="leftSelectedItem === 'Court Dates'"
+              pButton
+              pRipple
+              label="New Court Date"
+              icon="pi pi-plus"
+              class="p-button-primary mr-2"
+              (click)="openNew()"
+      ></button>
     </div>
 
-    <mat-drawer-container
-      *ngIf="leftSelectedItem === 'Case Progress'"
-      class="demo-app"
-    >
+    <mat-drawer-container *ngIf="leftSelectedItem === 'Case Progress'"
+      class="demo-app">
       <mat-drawer
         #rightNav
         class="p-d-flex"
@@ -72,7 +80,14 @@
           >
             <p-tabPanel [header]="item">
               <ng-template pTemplate="content">
-                <div class="px-2">
+                <div class="">
+                  <button *ngIf="leftSelectedItem === 'Case Progress'"
+                          pButton
+                          pRipple
+                          label="Complete Stage"
+                          icon="pi pi-plus"
+                          class="p-button-primary mr-2 btn-complete-stage"
+                  ></button>
                   {{ rightSelectedItem }} Content 1 {{ activeTabIndex }}
                 </div>
               </ng-template>
@@ -95,17 +110,17 @@
     </ng-template>
     <ng-template [ngIf]="leftSelectedItem === 'Court Dates'">
       <div class="p-4 mt-1">
-        <div class="d-flex justify-content-between align-items-center p-4 my-0">
-          <h1 class="my-0">Appearances</h1>
-          <button
-            pButton
-            pRipple
-            label="New Court Date"
-            icon="pi pi-plus"
-            class="p-button-primary mr-2"
-            (click)="openNew()"
-          ></button>
-        </div>
+<!--        <div class="d-flex justify-content-between align-items-center p-4 my-0">-->
+<!--          <h1 class="my-0">Appearances</h1>-->
+<!--          <button *ngIf="leftSelectedItem === 'Court Dates'"-->
+<!--            pButton-->
+<!--            pRipple-->
+<!--            label="New Court Date"-->
+<!--            icon="pi pi-plus"-->
+<!--            class="p-button-primary mr-2"-->
+<!--            (click)="openNew()"-->
+<!--          ></button>-->
+<!--        </div>-->
         <div>
           <p-dataView
             #dv
@@ -137,7 +152,7 @@
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">Time :</div>
-                  <div>{{ product.courtTime }}</div>
+                  <div>{{toTimeString(product.courtTime)}}</div>
                 </div>
                 <div class="p-d-inline-flex p-col-12">
                   <div class="mr-2 case-type-label">outcome :</div>

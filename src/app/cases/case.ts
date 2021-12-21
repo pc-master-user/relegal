@@ -23,21 +23,21 @@ export interface Address {
     occupancyStatus?:string;
 }
 
-export interface Client { 
+export interface Client {
     code?: string;
     loanNumber?: String;
 }
-export interface Investor { 
+export interface Investor {
     code?: string;
     loanNumber?: String;
 }
-export interface County { 
+export interface County {
     id: number;
     name: string;
     district: number;
     division: number;
 }
-export interface Matter{ 
+export interface Matter{
     id?: string;
     caseType?: string;
     defendantName?: string;
@@ -58,9 +58,9 @@ export interface CourtDate {
   id?: string;
   type?: string;
   createdBy?: string;
-  createdDate?: Date;
-  courtDate?: Date;
-  courtTime?: string;
+  createdDate?: any;
+  courtDate?: any;
+  courtTime?: any;
   outcome?: string;
 }
 
@@ -71,4 +71,14 @@ export interface Hold {
   start?: Date;
   end?: Date;
   resumeReason?: Date;
+}
+
+
+export interface referralReviewal {
+  id?: string;
+  isPostComplaintTransfer?: boolean;
+  started?: Date;
+  completed?: Date;
+  event?: Date;
+  due?: Date;
 }
