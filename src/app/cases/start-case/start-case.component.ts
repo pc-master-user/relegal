@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
 import { MessageService, PrimeIcons, PrimeNGConfig } from 'primeng/api';
-import { CourtDate } from '../case';
+import {CourtDate, referralReviewal} from '../case';
 import { FormControl } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
@@ -74,9 +74,7 @@ export class StartCaseComponent implements OnInit {
 
   // For Case progress
   //referralReceived
-  referralReviewal: any = {
-    'started': ''
-  };
+  referralReviewal: referralReviewal = {};
   isPostComplaintTransfer!: boolean;
 
 
@@ -106,13 +104,13 @@ export class StartCaseComponent implements OnInit {
         if (this.user?.courtDates) {
           for (let i= 0; i < this.user.courtDates.length; i++){
             let a = this.user.courtDates[0];
-            if (a.createdDate) {
+            if (a.createdDate && a.createdDate.seconds) {
               this.user.courtDates[0].createdDate = a.createdDate.toDate();
             }
-            if (a.courtDate) {
+            if (a.courtDate && a.courtDate.seconds) {
               this.user.courtDates[0].courtDate = a.courtDate.toDate();
             }
-            if (a.courtTime) {
+            if (a.courtTime && a.courtTime.seconds) {
               this.user.courtDates[0].courtTime = a.courtTime.toDate();
             }
           }
@@ -214,6 +212,12 @@ console.log(this.user?.courtDates)
       'Post-Sale Deed': ['RJI', 'FSC Released', 'First FSC'],
     };
     this.leftSelectedItem = 'Case Information';
+
+    this.referralReviewal.started = this.referralReviewal?.started ? this.referralReviewal.started : new Date();
+    this.referralReviewal.completed = this.referralReviewal?.completed ? this.referralReviewal.completed : new Date();
+    this.referralReviewal.event = this.referralReviewal?.event ? this.referralReviewal.event : new Date();
+    this.referralReviewal.due = this.referralReviewal?.due ? this.referralReviewal.due : new Date();
+    console.log(this.referralReviewal?.started)
   }
 
   leftSideChange(data: any): void {
@@ -224,11 +228,11 @@ console.log(this.user?.courtDates)
     // }
   }
   rightSideChange(data: any): void {
-    this.activeTabIndex = 0;
+    this.activeTabIndex = 10;
     this.rightSelectedItem = data;
-    // setTimeout(() => {
-    //   this.activeTabIndex = 0;
-    // });
+    setTimeout(() => {
+      this.activeTabIndex = 0;
+    });
   }
 
   findIndexById(id: string, data: any[]): number {

@@ -76,8 +76,7 @@
           class="py-2"
         >
           <ng-container
-            *ngFor="let item of tabs[rightSelectedItem]; let i = index"
-          >
+            *ngFor="let item of tabs[rightSelectedItem]; let i = index">
             <p-tabPanel [header]="item">
               <ng-template pTemplate="content">
                 <div class="">
@@ -88,7 +87,297 @@
                           icon="pi pi-plus"
                           class="p-button-primary mr-2 btn-complete-stage"
                   ></button>
-                  {{ rightSelectedItem }} Content 1 {{ activeTabIndex }}
+                  <div *ngIf="rightSelectedItem === 'Referral Received'">
+                    <div class="d-flex justify-content-between align-items-center py-4 my-0">
+                      <h1 class="my-0">Sequence</h1>
+                    </div>
+                    <div *ngIf="item === 'Review'">
+                      <div class="p-d-flex p-align-center p-mb-4">
+                        <span class="p-d-inline-block p-mr-3">Is this a post-complaint transfer file?</span><p-checkbox [(ngModel)]="isPostComplaintTransfer" [binary]="true"></p-checkbox>
+                      </div>
+                      <div class="border rounded-lg p-3 p-d-inline-block">
+                        <div class="">
+                          <h3 style="font-weight: 500;"> Review of Referral</h3>
+                        </div>
+                        <div class="d-flex">
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Started</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.started"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Completed</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.completed"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="d-flex p-mt-3">
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Event</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.event"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Due</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.due"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="item === 'SCRA Search'">
+                      <div class="border rounded-lg p-3 p-d-inline-block">
+                        <h3 style="font-weight: 500;">SCRA Run</h3>
+                        <div class="d-flex">
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Started</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.started"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Completed</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.completed"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="d-flex p-mt-3">
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Event</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.event"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Due</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.due"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="border rounded-lg p-3 p-d-inline-block p-mt-4">
+                        <h3 style="font-weight: 500;">SCRA Uploaded to Client System</h3>
+                        <div class="d-flex">
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Started</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.started"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Completed</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.completed"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="d-flex p-mt-3">
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Event</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.event"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Due</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.due"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="item === 'Pacer Search'">
+                      <div class="border rounded-lg p-3 p-d-inline-block">
+                        <h3 style="font-weight: 500;">Pacer Run</h3>
+                        <div class="d-flex">
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Started</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.started"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Completed</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.completed"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="d-flex p-mt-3">
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Event</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.event"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Due</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.due"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="border rounded-lg p-3 p-d-inline-block p-mt-4">
+                        <h3 style="font-weight: 500;">Pacer Uploaded to Client System</h3>
+                        <div class="d-flex">
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Started</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.started"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Completed</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.completed"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="d-flex p-mt-3">
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Event</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.event"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Due</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.due"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="item === 'Title Report Order'">
+                      <div class="border rounded-lg p-3 p-d-inline-block">
+                        <div class="">
+                          <h3 style="font-weight: 500;"> Title Report Ordered</h3>
+                        </div>
+                        <div class="d-flex">
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Started</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.started"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mb-2 p-2 mw-250">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Completed</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.completed"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                        <div class="d-flex p-mt-3">
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="referralReviewalStarted" class="d-inline-block mb-2 p-mr-3">Event</label>
+                            <p-calendar id="referralReviewalStarted"
+                                        [(ngModel)]="referralReviewal.event"
+                                        dateFormat="mm/dd/yy"
+                                        styleClass=""
+                            ></p-calendar>
+                          </div>
+                          <div class="mw-250 p-2 mb-2">
+                            <label for="completed" class="d-inline-block mb-2 p-mr-3">Due</label>
+                            <p-calendar
+                              id="completed"
+                              [(ngModel)]="referralReviewal.due"
+                              dateFormat="mm/dd/yy"
+                              [showTransitionOptions]="'0ms'"
+                              [hideTransitionOptions]="'0ms'"
+                              styleClass=""
+                            ></p-calendar>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {{ rightSelectedItem }} Content {{item}} {{ activeTabIndex }}
                 </div>
               </ng-template>
             </p-tabPanel>

@@ -25,6 +25,7 @@
   min-height: 100%;
   font-size: 14px;
   background: white;
+  overflow: visible;
 }
 .demo-app-sidebar {
   flex-grow: 1;
@@ -37,6 +38,9 @@
   position: absolute;
   top: 28px;
   right: 0;
+}
+.mw-250 {
+  max-width: 250px;
 }
 //#eaf9ff
 
